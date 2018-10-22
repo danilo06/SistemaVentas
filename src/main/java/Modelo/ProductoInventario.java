@@ -24,5 +24,21 @@ public class ProductoInventario extends Producto {
      */
     private String fechaVencimiento;
 
+	public Integer getUnidades() {
+		return unidades;
+	}
 
+	public void setUnidades(Integer unidades) {
+		this.unidades = unidades;
+	}
+
+	public String getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+
+	public void setFechaVencimiento(String fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
+	}
+
+    
 }
