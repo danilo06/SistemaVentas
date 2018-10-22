@@ -2,6 +2,8 @@ package vista;
 
 import java.net.URL;
 import Modelo.*;
+import connection.*;
+
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -406,6 +408,11 @@ public class Controlador implements Initializable {
 
 	@FXML
 	void panel1btnInicioAction(ActionEvent event) {
+		ConsultaVista consulta = new ConsultaVista();
+		Empleado empleado = new Empleado();
+		empleado = consulta.autenticar(panel1TxtUsuario.getText(), panel1txtContrasena.getText());
+		panel2txtUsuario.setText(empleado.getUsuario());
+		panel2txtCargo.setText(empleado.getCargo());
 		panelMenu.setLayoutX(0);
 	}
 
