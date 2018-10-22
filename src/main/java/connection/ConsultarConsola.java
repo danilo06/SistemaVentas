@@ -29,7 +29,7 @@ public class ConsultarConsola {
 
 			ResultSetMetaData metaData = rowSet.getMetaData();
 			int numberOfColumns = metaData.getColumnCount();
-			System.out.println("Employee Table of Books Database:\n");
+			System.out.println("Table Empleado\n");
 
 			for (int i = 1; i <= numberOfColumns; i++)
 				System.out.printf("%-8s\t", metaData.getColumnName(i));
@@ -46,7 +46,7 @@ public class ConsultarConsola {
 
 			ResultSetMetaData metaData2 = rowSet.getMetaData();
 			int numberOfColumns2 = metaData2.getColumnCount();
-			System.out.println("salariedEmployee Table of Books Database:\n");
+			System.out.println("Table Proveedor\n");
 
 			for (int i = 1; i <= numberOfColumns2; i++)
 				System.out.printf("%-8s\t", metaData2.getColumnName(i));
@@ -63,7 +63,7 @@ public class ConsultarConsola {
 
 			ResultSetMetaData metaData3 = rowSet.getMetaData();
 			int numberOfColumns3 = metaData3.getColumnCount();
-			System.out.println("commissionEmployee Table of Books Database:\n");
+			System.out.println(" Table Producto\n");
 
 			for (int i = 1; i <= numberOfColumns3; i++)
 				System.out.printf("%-8s\t", metaData3.getColumnName(i));
@@ -80,7 +80,7 @@ public class ConsultarConsola {
 
 			ResultSetMetaData metaData4 = rowSet.getMetaData();
 			int numberOfColumns4 = metaData4.getColumnCount();
-			System.out.println("basePlusCommissionEmployee Table of Books Database:\n");
+			System.out.println("Table Inventario\n");
 
 			for (int i = 1; i <= numberOfColumns4; i++)
 				System.out.printf("%-8s\t", metaData4.getColumnName(i));
