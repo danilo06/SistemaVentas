@@ -1,8 +1,8 @@
 package vista;
 
 import java.net.URL;
+import Modelo.*;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -396,7 +396,9 @@ public class Controlador implements Initializable {
 
 	@FXML
 	private TextField panel6txtContrasena;
-
+	
+	Establecimiento local;
+	
 	@FXML
 	void panel1btnCerrarAction(ActionEvent event) {
 		System.exit(0);
@@ -559,6 +561,7 @@ public class Controlador implements Initializable {
 	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
+		local = new Establecimiento();
 		panelMenu.setLayoutX(2000);
 		panelVenta.setLayoutX(2000);
 		panelProveedor.setLayoutX(2000);
