@@ -5,6 +5,9 @@ import Modelo.*;
 import connection.*;
 
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +18,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -142,31 +146,31 @@ public class Controlador implements Initializable {
 	private Button panel4btnEliminarProducto;
 
 	@FXML
-	private TableView<?> panel4tablaInventario;
+	private TableView<ProductoInventario> panel4tablaInventario;
 
 	@FXML
-	private TableColumn<?, ?> panel4columID;
+	private TableColumn<ProductoInventario, String> panel4columID;
 
 	@FXML
-	private TableColumn<?, ?> panel4columNombre;
+	private TableColumn<ProductoInventario, String> panel4columNombre;
 
 	@FXML
-	private TableColumn<?, ?> panel4columMarca;
+	private TableColumn<ProductoInventario, String> panel4columMarca;
 
 	@FXML
-	private TableColumn<?, ?> panel4columCategoria;
+	private TableColumn<ProductoInventario, String> panel4columCategoria;
 
 	@FXML
-	private TableColumn<?, ?> panel4columContenidoNeto;
+	private TableColumn<ProductoInventario, String> panel4columContenidoNeto;
 
 	@FXML
-	private TableColumn<?, ?> panel4columCantidadUnd;
+	private TableColumn<ProductoInventario, Integer> panel4columCantidadUnd;
 
 	@FXML
-	private TableColumn<?, ?> panel4columFechaVencimiento;
+	private TableColumn<ProductoInventario, String> panel4columFechaVencimiento;
 
 	@FXML
-	private TableColumn<?, ?> panel4columPrecioCU;
+	private TableColumn<ProductoInventario, Double> panel4columPrecioCU;
 
 	@FXML
 	private TextField panel4txtNombre;
@@ -178,7 +182,7 @@ public class Controlador implements Initializable {
 	private TextField panel4txtIdentificador;
 
 	@FXML
-	private ComboBox<?> panel4cboxCategoria;
+	private ComboBox<String> panel4cboxCategoria;
 
 	@FXML
 	private TextField panel4txtContenidoNeto;
@@ -399,7 +403,9 @@ public class Controlador implements Initializable {
 	@FXML
 	private TextField panel6txtContrasena;
 	
-	Establecimiento local;
+	Establecimiento establecimiento;
+	
+	ObservableList<ProductoInventario> productosInventario;
 	
 	@FXML
 	void panel1btnCerrarAction(ActionEvent event) {
@@ -479,7 +485,16 @@ public class Controlador implements Initializable {
 
 	@FXML
 	void panel4btnAgregarProductoAction(ActionEvent event) {
-
+		ProductoInventario producto = new ProductoInventario();
+		producto.setNombre(panel4txtNombre.getText());
+		producto.setMarca(panel4txtMarca.getText());
+		producto.setIdProducto(panel4txtIdentificador.getText());
+		producto.setCategoria(panel4cboxCategoria.getValue());
+		producto.setContenido(panel4txtContenidoNeto.getText());
+		producto.setUnidades(Integer.parseInt(panel4txtCantidad.getText()));
+		//producto.setFechaVencimiento(panel4DateFechaVencimiento.getValue().toString());
+		producto.setPrecio(Double.valueOf(panel4txtPrecioUnd.getText()));
+		productosInventario.add(producto);
 	}
 
 	@FXML
@@ -568,12 +583,42 @@ public class Controlador implements Initializable {
 	}
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		local = new Establecimiento();
 		panelMenu.setLayoutX(2000);
 		panelVenta.setLayoutX(2000);
 		panelProveedor.setLayoutX(2000);
 		panelInventario.setLayoutX(2000);
 		panelRecursosHumanos.setLayoutX(2000);
+		panel4cboxCategoria.getItems().add("Grano");
+		panel4cboxCategoria.getItems().add("Fritura");
+		panel4cboxCategoria.getItems().add("Higiene");
+		panel4cboxCategoria.getItems().add("Bebida");
+		panel4cboxCategoria.getItems().add("Alimentos");
+		panel4cboxCategoria.getItems().add("Cereal");
+		panel4cboxCategoria.getItems().add("Salsas");
+		panel4cboxCategoria.getItems().add("Lacteos");
+		panel4cboxCategoria.getItems().add("Verdura");
+		panel4cboxCategoria.getItems().add("Fruta");
+		panel4cboxCategoria.getItems().add("Verdura");
+		this.inicializarTablaInventario();
+		
+		establecimiento = new Establecimiento();
+		for (int i=0;i<establecimiento.getProductos().size();i++) {
+			productosInventario.add(establecimiento.getProductos().get(i));
+		}
+		
+	}
+	
+	private void inicializarTablaInventario() {
+		panel4columID.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("idProducto"));
+		panel4columNombre.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("nombre"));
+		panel4columMarca.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("marca"));
+		panel4columCategoria.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("categoria"));
+		panel4columContenidoNeto.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("contenido"));
+		panel4columCantidadUnd.setCellValueFactory(new PropertyValueFactory<ProductoInventario, Integer>("unidades"));
+		panel4columFechaVencimiento.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("fechaVencimiento"));
+		panel4columPrecioCU.setCellValueFactory(new PropertyValueFactory<ProductoInventario, Double>("precio"));
+		productosInventario = FXCollections.observableArrayList();
+		panel4tablaInventario.setItems(productosInventario);
 	}
 
 }
