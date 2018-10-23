@@ -14,7 +14,7 @@ public class InsertTable {
 	
 	private Connection connection = null; // manages connection
 	private PreparedStatement insertNewProductoInventario = null;
-	private PreparedStatement insertNewsalariedEmployee = null;
+	private PreparedStatement insertNewsProveedor = null;
 	private PreparedStatement insertNewcommissionEmployee = null;
 	private PreparedStatement insertNewbasePlusCommissionEmployee = null;
 	private PreparedStatement insertNewhourlyEmployee = null;
@@ -25,8 +25,8 @@ public class InsertTable {
 			insertNewProductoInventario = connection.prepareStatement(
 					"INSERT INTO Inventario " + "(ID_Producto, Nombre, Marca, Categoria, Contenido_neto, Unidades, Fecha_vencimiento, Precio) " + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)");
 			//******************************************
-			insertNewsalariedEmployee = connection.prepareStatement(
-					"INSERT INTO salariedEmployee " + "(socialsecurityNumber, weeklySalary, bonus) " + "VALUES ( ?, ?, ?)");
+			insertNewsProveedor = connection.prepareStatement(
+					"INSERT INTO Proveedor " + "(ID_proveedor, nombre_empresa, telefono, Direccion, Correo) " + "VALUES ( ?, ?, ?, ?, ?)");
 			//******************************************
 			insertNewcommissionEmployee = connection.prepareStatement(
 					"INSERT INTO commissionEmployee " + "(socialsecurityNumber, grossSales, commissionRate, bonus) " + "VALUES ( ?, ?, ?, ?)");
@@ -60,14 +60,17 @@ public class InsertTable {
 		}
 		return result;
 	}
-	public int addSalariedEmployee(String socialNumber, float weeklySalary , float bonus) {
+	public int addProveedor(String idProveedor, String nombre_empresa , String telefono, String direccion, String correo) {
 		int result = 0;
 		try {
-			insertNewsalariedEmployee.setString(1, socialNumber);
-			insertNewsalariedEmployee.setFloat(2, weeklySalary);
-			insertNewsalariedEmployee.setFloat(3, bonus);
+			insertNewsProveedor.setString(1, idProveedor);
+			insertNewsProveedor.setString(2, nombre_empresa);
+			insertNewsProveedor.setString(3, telefono);
+			insertNewsProveedor.setString(4, direccion);
+			insertNewsProveedor.setString(5, correo);
 			
-			result = insertNewsalariedEmployee.executeUpdate();
+			
+			result = insertNewsProveedor.executeUpdate();
 		}
 		catch (SQLException sqlException) {
 			sqlException.printStackTrace();

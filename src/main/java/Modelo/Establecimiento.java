@@ -147,6 +147,11 @@ public class Establecimiento {
 		InsertarTabla.addProductoInventario(producto.getIdProducto(), producto.getNombre(), producto.getMarca(), producto.getCategoria(), producto.getContenido(), producto.getUnidades(), producto.getFechaVencimiento(), producto.getPrecio());
 		productos.add(producto);
 	}
+	
+	public void agregarProveedor(Proveedor proveeedor) {
+		InsertarTabla.addProveedor(proveeedor.getIdProveedor() , proveeedor.getNombre() , proveeedor.getTelefono(), proveeedor.getDireccion(), proveeedor.getCorreo());
+	proveedores.add(proveeedor);
+	}
     
 	public int buscarProducto(String idProducto) {
 		for (int i=0;i<productos.size();i++) {

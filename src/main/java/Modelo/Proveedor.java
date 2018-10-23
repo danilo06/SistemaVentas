@@ -90,6 +90,8 @@ public class Proveedor extends Persona {
     public void eliminarProducto(void idProducto) {
         // TODO implement here
     }
+    *
+    *
     */
     
     

@@ -129,6 +129,9 @@ public class Controlador implements Initializable {
 
 	@FXML
 	private TextField panel3txtEstadoCompra;
+	
+	@FXML
+    private Button panel3btnNuevaCompra;
 
 	@FXML
 	private AnchorPane panelInventario;
@@ -395,21 +398,21 @@ public class Controlador implements Initializable {
 	private Button panel6btnEliminar;
 
 	@FXML
-	private ComboBox<?> panel6cboxCargo;
+	private ComboBox<String> panel6cboxCargo;
 
 	@FXML
 	private TextField panel6txtUsuario;
 
 	@FXML
 	private TextField panel6txtContrasena;
-	
+
 	Establecimiento establecimiento;
-	
+
 	ObservableList<ProductoInventario> productosInventario;
 	ObservableList<Empleado> empleados;
 	ObservableList<Proveedor> proveedores;
 	ObservableList<ProductoInventario> productosVenta;
-	
+
 	@FXML
 	void panel1btnCerrarAction(ActionEvent event) {
 		System.exit(0);
@@ -422,7 +425,7 @@ public class Controlador implements Initializable {
 		empleado = consulta.autenticar(panel1TxtUsuario.getText(), panel1txtContrasena.getText());
 		panel2txtUsuario.setText(empleado.getUsuario());
 		panel2txtCargo.setText(empleado.getCargo());
-		switch (empleado.getCargo()){
+		switch (empleado.getCargo()) {
 		case "Administrador":
 			panel2imgRecursosHumanos.setLayoutX(938);
 			panel2imgProveedores.setLayoutX(950);
@@ -437,7 +440,7 @@ public class Controlador implements Initializable {
 			System.exit(0);
 			break;
 		}
-		
+
 		panelMenu.setLayoutX(0);
 	}
 
@@ -476,26 +479,46 @@ public class Controlador implements Initializable {
 	@FXML
 	void panel3btnAgregarAction(ActionEvent event) {
 		int valor = establecimiento.buscarProducto(panel3txtAgregarProductoID.getText());
-		int total=0;
+		int total = 0;
 		if (valor == 1) {
 			ProductoInventario producto = establecimiento.traerProducto(panel3txtAgregarProductoID.getText());
 			productosVenta.add(producto);
 			producto.generarTotal();
 			panel3btnPagar.setDisable(false);
 			panel3btnEliminar.setDisable(false);
-		}else {
-			panel3txtEstadoCompra.setText("Producto no encontrado");
+			panel3btnNuevaCompra.setDisable(false);
+			System.out.println("Proucto encontrado");
+
+
+		} else {
+			System.out.println("Proucto no encontrado");
+			panel3txtEstadoCompra.setText("Proucto no encontrado");
 		}
-		for (int i=0;i<productosVenta.size();i++) {
-			total+=productosVenta.get(i).getPrecio();
+		for (int i = 0; i < productosVenta.size(); i++) {
+			total += productosVenta.get(i).getPrecio();
 		}
 		panel3txtTotalTabla.setText(String.valueOf(total));
 		panel3txtTotalCompra.setText(String.valueOf(total));
+		panel3txtEstadoCompra.setText("");
 	}
 
 	@FXML
 	void panel3btnCerrarAction(ActionEvent event) {
 		System.exit(0);
+	}
+	
+	@FXML
+    void panel3btnNuevaCompraAction(ActionEvent event) {
+		productosVenta.clear();
+		panel3txtTotalTabla.setText("0");
+		panel3txtTotalCompra.setText("0");
+		panel3txtDineroEntrante.setText("");
+		panel3txtSaldo.setText("0");
+		panel3txtAgregarProductoID.setText("");
+		panel3txtEliminarProductoID.setText("");
+		panel3txtEstadoCompra.setText("");
+		
+		
 	}
 
 	@FXML
@@ -510,11 +533,12 @@ public class Controlador implements Initializable {
 
 	@FXML
 	void panel3btnPagarAction(ActionEvent event) {
-		Double Saldo = (Double.parseDouble(panel3txtDineroEntrante.getText()))-(Double.parseDouble(panel3txtTotalCompra.getText()));
+		Double Saldo = (Double.parseDouble(panel3txtDineroEntrante.getText()))
+				- (Double.parseDouble(panel3txtTotalCompra.getText()));
 		panel3txtSaldo.setText(String.valueOf(Saldo));
-		if (Saldo<0) {
+		if (Saldo < 0) {
 			panel3txtEstadoCompra.setText("Saldo Insuficiente,compra no valida");
-		}else {
+		} else {
 			panel3txtEstadoCompra.setText("Compra Realizada");
 		}
 	}
@@ -566,7 +590,20 @@ public class Controlador implements Initializable {
 
 	@FXML
 	void panel5btnAgregarProveedorAction(ActionEvent event) {
-
+		Proveedor proveedor = new Proveedor();
+		proveedor.setIdProveedor(panel5txtCodigoProveedor.getText());
+		proveedor.setTelefono(panel5txtTelefono.getText());
+		proveedor.setDireccion(panel5txtDireccion.getText());
+		proveedor.setCorreo(panel5txtCorreo.getText());
+		proveedor.setNombre(panel5txtNombreEmpresa.getText());
+		System.out.println("-----------------------");
+		System.out.println(proveedor.getIdProveedor());
+		System.out.println("-----------------------");
+		System.out.println(panel5txtCodigoProveedor.getText());
+		System.out.println("-----------------------");
+		proveedores.add(proveedor);
+		establecimiento.agregarProveedor(proveedor);
+		//Aun falta que se agregue el codigo del proveedor al elemento.
 	}
 
 	@FXML
@@ -601,7 +638,18 @@ public class Controlador implements Initializable {
 
 	@FXML
 	void panel6btnAgregarAction(ActionEvent event) {
-
+		Empleado persona = new Empleado();
+		persona.setFechaNacimiento(panel6DateFechaNacimiento.getValue().toString());
+		persona.setDireccion(panel6txtDireccion.getText());
+		persona.setCedula(panel6txtCedula.getText());
+		persona.setTelefono(panel6txtTelefono.getText());
+		persona.setNombre(panel6txtNombre.getText());
+		persona.setCodigo(panel6txtCodigoEmpleado.getText());
+		persona.setSalario(Double.valueOf(panel6txtSalario.getText()));
+		persona.setCargo(panel6cboxCargo.getValue().toString());
+		persona.setUsuario(panel6txtUsuario.getText());
+		persona.setContrasena(panel6txtContrasena.getText());
+		empleados.add(persona);
 	}
 
 	@FXML
@@ -623,7 +671,7 @@ public class Controlador implements Initializable {
 	void panel6imgRegresarAction(MouseEvent event) {
 		panelRecursosHumanos.setLayoutX(2000);
 	}
-	
+
 	public void initialize(URL location, ResourceBundle resources) {
 		panelMenu.setLayoutX(2000);
 		panelVenta.setLayoutX(2000);
@@ -641,37 +689,41 @@ public class Controlador implements Initializable {
 		panel4cboxCategoria.getItems().add("Verdura");
 		panel4cboxCategoria.getItems().add("Fruta");
 		panel4cboxCategoria.getItems().add("Verdura");
-		
+
 		panel3txtTotalTabla.setText("0");
 		panel3txtTotalCompra.setText("0");
 		panel3txtSaldo.setText("0");
 		panel3txtDineroEntrante.setText("0");
-		
+
 		panel3btnPagar.setDisable(true);
 		panel3btnEliminar.setDisable(true);
 		panel3btnGenerarFactura.setDisable(true);
+		panel3btnNuevaCompra.setDisable(true);
 		
-		
+		panel6cboxCargo.getItems().add("Administrador");
+		panel6cboxCargo.getItems().add("Cajero");
+
 		this.inicializarTablaInventario();
 		this.inicializarTablaVenta();
 		this.inicializarTablaRecursosHumanos();
 		this.inicializarTablaProveedores();
-		
+
 		establecimiento = new Establecimiento();
-		for (int i=0;i<establecimiento.getProductos().size();i++) {
+		for (int i = 0; i < establecimiento.getProductos().size(); i++) {
 			productosInventario.add(establecimiento.getProductos().get(i));
 		}
-		for (int i=0;i<establecimiento.getEmpleados().size();i++) {
+		for (int i = 0; i < establecimiento.getEmpleados().size(); i++) {
 			empleados.add(establecimiento.getEmpleados().get(i));
 		}
-		for (int i=0;i<establecimiento.getProveedores().size();i++) {
+		for (int i = 0; i < establecimiento.getProveedores().size(); i++) {
 			proveedores.add(establecimiento.getProveedores().get(i));
 		}
 	}
-	
+
 	private void inicializarTablaVenta() {
 		panel3columNombre.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("nombre"));
-		panel3columIdentificador.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("idProducto"));
+		panel3columIdentificador
+				.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("idProducto"));
 		panel3columContenido.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("contenido"));
 		panel3columUnd.setCellValueFactory(new PropertyValueFactory<ProductoInventario, Integer>("unidades"));
 		panel3columPrecioCU.setCellValueFactory(new PropertyValueFactory<ProductoInventario, Double>("precio"));
@@ -679,7 +731,7 @@ public class Controlador implements Initializable {
 		productosVenta = FXCollections.observableArrayList();
 		panel3TablaVenta.setItems(productosVenta);
 	}
-	
+
 	private void inicializarTablaInventario() {
 		panel4columID.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("idProducto"));
 		panel4columNombre.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("nombre"));
@@ -687,12 +739,13 @@ public class Controlador implements Initializable {
 		panel4columCategoria.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("categoria"));
 		panel4columContenidoNeto.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("contenido"));
 		panel4columCantidadUnd.setCellValueFactory(new PropertyValueFactory<ProductoInventario, Integer>("unidades"));
-		panel4columFechaVencimiento.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("fechaVencimiento"));
+		panel4columFechaVencimiento
+				.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("fechaVencimiento"));
 		panel4columPrecioCU.setCellValueFactory(new PropertyValueFactory<ProductoInventario, Double>("precio"));
 		productosInventario = FXCollections.observableArrayList();
 		panel4tablaInventario.setItems(productosInventario);
 	}
-	
+
 	private void inicializarTablaRecursosHumanos() {
 		panel6columCodigoEmpleado.setCellValueFactory(new PropertyValueFactory<Empleado, String>("codigo"));
 		panel6columNombre.setCellValueFactory(new PropertyValueFactory<Empleado, String>("nombre"));
@@ -700,7 +753,7 @@ public class Controlador implements Initializable {
 		empleados = FXCollections.observableArrayList();
 		panel6tablaRRHH.setItems(empleados);
 	}
-	
+
 	private void inicializarTablaProveedores() {
 		panel5columCP.setCellValueFactory(new PropertyValueFactory<Proveedor, String>("idProveedor"));
 		panel5columNombreEmpresa.setCellValueFactory(new PropertyValueFactory<Proveedor, String>("nombre"));
@@ -710,6 +763,5 @@ public class Controlador implements Initializable {
 		proveedores = FXCollections.observableArrayList();
 		panel5tablaProveedores.setItems(proveedores);
 	}
-
 
 }

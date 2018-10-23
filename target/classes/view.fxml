@@ -219,6 +219,7 @@
                   <Font name="System Bold" size="51.0" />
                </font>
             </Label>
+            <Button fx:id="panel3btnNuevaCompra" layoutX="1146.0" layoutY="524.0" mnemonicParsing="false" onAction="#panel3btnNuevaCompraAction" prefHeight="47.0" prefWidth="102.0" text="Nueva Compra" />
          </children></AnchorPane>
       <AnchorPane fx:id="panelInventario" layoutX="4145.0" layoutY="-44.0" prefHeight="743.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;">
          <children>
@@ -371,7 +372,6 @@
                                  </font>
                               </Label>
                               <TextField fx:id="panel5txtNombreEmpresa" layoutX="135.0" layoutY="21.0" />
-                              <TextField fx:id="panel5txtCodigoProveedor" layoutX="135.0" layoutY="59.0" />
                               <Label layoutX="14.0" layoutY="98.0" text="Telefono">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
@@ -391,6 +391,7 @@
                               </Label>
                               <TextField fx:id="panel5txtCorreo" layoutX="135.0" layoutY="168.0" />
                               <Button fx:id="panel5btnAgregarProvedor" layoutX="311.0" layoutY="166.0" mnemonicParsing="false" onAction="#panel5btnAgregarProveedorAction" style="-fx-background-color: #99ff66;" text="Agregar" />
+                              <TextField fx:id="panel5txtCodigoProveedor" layoutX="135.0" layoutY="58.0" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
