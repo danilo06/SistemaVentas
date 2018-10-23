@@ -21,6 +21,8 @@ public class Establecimiento {
     	productos = baseDatos.consultaInventario();
     	empleados = baseDatos.consultaEmpleados();
     	
+    	InsertarTabla = new InsertTable();
+    	
     }
 
     /**
@@ -52,6 +54,9 @@ public class Establecimiento {
      * 
      */
     private ArrayList empleados;
+    
+    
+    private InsertTable InsertarTabla;
 
 	/**
 	 * @return the nombre
@@ -137,8 +142,8 @@ public class Establecimiento {
 		this.empleados = empleados;
 	}
     
-	public void agregarProductoInventario(ProductoInventario pruducto) {
-		
+	public void agregarProductoInventario(ProductoInventario producto) {
+		InsertarTabla.addProductoInventario(producto.getIdProducto(), producto.getNombre(), producto.getMarca(), producto.getCategoria(), producto.getContenido(), producto.getUnidades(), producto.getFechaVencimiento(), producto.getPrecio());
 	}
     
 

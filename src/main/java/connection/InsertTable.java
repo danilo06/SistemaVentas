@@ -13,7 +13,7 @@ public class InsertTable {
 	static final String PASSWORD = DbPropertiesReader.getString("db.password");
 	
 	private Connection connection = null; // manages connection
-	private PreparedStatement insertNewEmployee = null;
+	private PreparedStatement insertNewProductoInventario = null;
 	private PreparedStatement insertNewsalariedEmployee = null;
 	private PreparedStatement insertNewcommissionEmployee = null;
 	private PreparedStatement insertNewbasePlusCommissionEmployee = null;
@@ -22,8 +22,8 @@ public class InsertTable {
 	public InsertTable() {
 		try {
 			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			insertNewEmployee = connection.prepareStatement(
-					"INSERT INTO employee " + "(socialSecurityNumber, firstName, lastName, birthday, employeeType, departmentName) " + "VALUES ( ?, ?, ?, ?, ?, ?)");
+			insertNewProductoInventario = connection.prepareStatement(
+					"INSERT INTO Inventario " + "(ID_Producto, Nombre, Marca, Categoria, Contenido_neto, Unidades, Fecha_vencimiento, Precio) " + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)");
 			//******************************************
 			insertNewsalariedEmployee = connection.prepareStatement(
 					"INSERT INTO salariedEmployee " + "(socialsecurityNumber, weeklySalary, bonus) " + "VALUES ( ?, ?, ?)");
@@ -34,25 +34,25 @@ public class InsertTable {
 			insertNewbasePlusCommissionEmployee = connection.prepareStatement(
 					"INSERT INTO basePlusCommissionEmployee " + "(socialsecurityNumber, grossSales, commissionRate, baseSalary, bonus) " + "VALUES ( ?, ?, ?, ?, ?)");
 			//******************************************
-			insertNewhourlyEmployee = connection.prepareStatement(
-					"INSERT INTO hourlyEmployee " + "(socialsecurityNumber, hours, wage, bonus) " + "VALUES ( ?, ?, ?, ?)");
 		}
 		catch (SQLException sqlException) {
 			sqlException.printStackTrace();
 			System.exit(1);
 		} // end catch
 	} // end PersonQueries constructor
-	public int addEmployee(String socialNumber, String fname, String lname, Date nacimiento, String tipo, String departamento) {
+	public int addProductoInventario(String idProducto, String nombre, String marca, String categoria, String contenido, int unidades, String fechaVencimiento, Double precio ) {
 		int result = 0;
 		try {
-			insertNewEmployee.setString(1, socialNumber);
-			insertNewEmployee.setString(2, fname);
-			insertNewEmployee.setString(3, lname);
-			insertNewEmployee.setDate(4, nacimiento);
-			insertNewEmployee.setString(5,tipo);
-			insertNewEmployee.setString(6, departamento);
+			insertNewProductoInventario.setString(1, idProducto);
+			insertNewProductoInventario.setString(2, nombre);
+			insertNewProductoInventario.setString(3, marca);
+			insertNewProductoInventario.setString(4, categoria);
+			insertNewProductoInventario.setString(5,contenido);
+			insertNewProductoInventario.setInt(6, unidades);
+			insertNewProductoInventario.setString(7, fechaVencimiento);
+			insertNewProductoInventario.setDouble(8, precio);
 
-			result = insertNewEmployee.executeUpdate();
+			result = insertNewProductoInventario.executeUpdate();
 		}
 		catch (SQLException sqlException) {
 			sqlException.printStackTrace();
@@ -107,23 +107,6 @@ public class InsertTable {
 		}
 		return result;
 	}
-	
-	public int addHourlyEmployee(String socialNumber, int hours, float wage, float bonus) {
-		int result = 0;
-		try {
-			insertNewhourlyEmployee.setString(1, socialNumber);
-			insertNewhourlyEmployee.setInt(2, hours);
-			insertNewhourlyEmployee.setFloat(3, wage);
-			insertNewhourlyEmployee.setFloat(4, bonus);
-			result = insertNewhourlyEmployee.executeUpdate();
-		}
-		catch (SQLException sqlException) {
-			sqlException.printStackTrace();
-			close();
-		}
-		return result;
-	}
-	
 	
 	
 	public void close() {

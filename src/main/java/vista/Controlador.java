@@ -430,7 +430,8 @@ public class Controlador implements Initializable {
 	@FXML
 	void panel2btnCerrarSesionAction(ActionEvent event) {
 		panelMenu.setLayoutX(2000);
-		//falta cerrar sesion
+		panel1TxtUsuario.clear();
+		panel1txtContrasena.clear();
 	}
 
 	@FXML
@@ -492,9 +493,10 @@ public class Controlador implements Initializable {
 		producto.setCategoria(panel4cboxCategoria.getValue());
 		producto.setContenido(panel4txtContenidoNeto.getText());
 		producto.setUnidades(Integer.parseInt(panel4txtCantidad.getText()));
-		//producto.setFechaVencimiento(panel4DateFechaVencimiento.getValue().toString());
+		producto.setFechaVencimiento(panel4DateFechaVencimiento.getValue().toString());
 		producto.setPrecio(Double.valueOf(panel4txtPrecioUnd.getText()));
 		productosInventario.add(producto);
+		establecimiento.agregarProductoInventario(producto);
 	}
 
 	@FXML
