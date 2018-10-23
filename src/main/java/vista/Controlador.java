@@ -458,17 +458,21 @@ public class Controlador implements Initializable {
 	@FXML
 	void panel3btnAgregarAction(ActionEvent event) {
 		int valor = establecimiento.buscarProducto(panel3txtAgregarProductoID.getText());
+		int total=0;
 		if (valor == 1) {
 			ProductoInventario producto = establecimiento.traerProducto(panel3txtAgregarProductoID.getText());
-			producto.generarTotal();
 			productosVenta.add(producto);
+			producto.generarTotal();
 			panel3btnPagar.setDisable(false);
 			panel3btnEliminar.setDisable(false);
-			panel3txtEstadoCompra.setText("Producto Agregado");
 		}else {
 			panel3txtEstadoCompra.setText("Producto no encontrado");
 		}
-		
+		for (int i=0;i<productosVenta.size();i++) {
+			total+=productosVenta.get(i).getPrecio();
+		}
+		panel3txtTotalTabla.setText(String.valueOf(total));
+		panel3txtTotalCompra.setText(String.valueOf(total));
 	}
 
 	@FXML
@@ -488,7 +492,13 @@ public class Controlador implements Initializable {
 
 	@FXML
 	void panel3btnPagarAction(ActionEvent event) {
-
+		Double Saldo = (Double.parseDouble(panel3txtDineroEntrante.getText()))-(Double.parseDouble(panel3txtTotalCompra.getText()));
+		panel3txtSaldo.setText(String.valueOf(Saldo));
+		if (Saldo<0) {
+			panel3txtEstadoCompra.setText("Saldo Insuficiente,compra no valida");
+		}else {
+			panel3txtEstadoCompra.setText("Compra Realizada");
+		}
 	}
 
 	@FXML
@@ -613,6 +623,12 @@ public class Controlador implements Initializable {
 		panel4cboxCategoria.getItems().add("Verdura");
 		panel4cboxCategoria.getItems().add("Fruta");
 		panel4cboxCategoria.getItems().add("Verdura");
+		
+		panel3txtTotalTabla.setText("0");
+		panel3txtTotalCompra.setText("0");
+		panel3txtSaldo.setText("0");
+		panel3txtDineroEntrante.setText("0");
+		
 		panel3btnPagar.setDisable(true);
 		panel3btnEliminar.setDisable(true);
 		panel3btnGenerarFactura.setDisable(true);

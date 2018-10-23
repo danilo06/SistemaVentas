@@ -163,6 +163,7 @@ public class Establecimiento {
 				producto = productos.get(i);
 			}
 		}
+		producto.setUnidades(1);
 		return producto;
 	}
 	
