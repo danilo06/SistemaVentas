@@ -43,17 +43,17 @@ public class Establecimiento {
     /**
      * 
      */
-    private ArrayList productos;
+    private ArrayList<ProductoInventario> productos;
 
     /**
      * 
      */
-    private ArrayList proveedores;
+    private ArrayList<Proveedor> proveedores;
 
     /**
      * 
      */
-    private ArrayList empleados;
+    private ArrayList<Empleado> empleados;
     
     
     private InsertTable InsertarTabla;
@@ -110,41 +110,60 @@ public class Establecimiento {
 	/**
 	 * @param productos the productos to set
 	 */
-	public void setProductos(ArrayList productos) {
+	public void setProductos(ArrayList<ProductoInventario> productos) {
 		this.productos = productos;
 	}
 
 	/**
 	 * @return the proveedores
 	 */
-	public ArrayList getProveedores() {
+	public ArrayList<Proveedor> getProveedores() {
 		return proveedores;
 	}
 
 	/**
 	 * @param proveedores the proveedores to set
 	 */
-	public void setProveedores(ArrayList proveedores) {
+	public void setProveedores(ArrayList<Proveedor> proveedores) {
 		this.proveedores = proveedores;
 	}
 
 	/**
 	 * @return the empleados
 	 */
-	public ArrayList getEmpleados() {
+	public ArrayList<Empleado> getEmpleados() {
 		return empleados;
 	}
 
 	/**
 	 * @param empleados the empleados to set
 	 */
-	public void setEmpleados(ArrayList empleados) {
+	public void setEmpleados(ArrayList<Empleado> empleados) {
 		this.empleados = empleados;
 	}
     
 	public void agregarProductoInventario(ProductoInventario producto) {
 		InsertarTabla.addProductoInventario(producto.getIdProducto(), producto.getNombre(), producto.getMarca(), producto.getCategoria(), producto.getContenido(), producto.getUnidades(), producto.getFechaVencimiento(), producto.getPrecio());
+		productos.add(producto);
 	}
     
-
+	public int buscarProducto(String idProducto) {
+		for (int i=0;i<productos.size();i++) {
+			if (productos.get(i).getIdProducto().equals(idProducto)) {
+				return 1;
+			}
+		}
+		return 0;
+	}
+	
+	public ProductoInventario traerProducto(String id) {
+		ProductoInventario producto = new ProductoInventario();
+		for (int i=0;i<productos.size();i++) {
+			if (productos.get(i).getIdProducto().equals(id)) {
+				producto = productos.get(i);
+			}
+		}
+		return producto;
+	}
+	
 }

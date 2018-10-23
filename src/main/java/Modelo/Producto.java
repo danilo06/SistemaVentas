@@ -42,7 +42,7 @@ public class Producto {
     /**
      * 
      */
-    private Double precio;
+    protected Double precio;
 
 	public String getIdProducto() {
 		return idProducto;
