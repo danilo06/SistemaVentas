@@ -650,6 +650,8 @@ public class Controlador implements Initializable {
 		persona.setUsuario(panel6txtUsuario.getText());
 		persona.setContrasena(panel6txtContrasena.getText());
 		empleados.add(persona);
+		
+		//Falta subir la informacion a la Base de datos.
 	}
 
 	@FXML
