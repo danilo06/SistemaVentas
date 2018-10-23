@@ -212,22 +212,22 @@ public class Controlador implements Initializable {
 	private ImageView panel5imgRegresar;
 
 	@FXML
-	private TableView<?> panel5tablaProveedores;
+	private TableView<Proveedor> panel5tablaProveedores;
 
 	@FXML
-	private TableColumn<?, ?> panel5columCP;
+	private TableColumn<Proveedor, String> panel5columCP;
 
 	@FXML
-	private TableColumn<?, ?> panel5columNombreEmpresa;
+	private TableColumn<Proveedor, String> panel5columNombreEmpresa;
 
 	@FXML
-	private TableColumn<?, ?> panel5columTelefono;
+	private TableColumn<Proveedor, String> panel5columTelefono;
 
 	@FXML
-	private TableColumn<?, ?> panel5columDireccion;
+	private TableColumn<Proveedor, String> panel5columDireccion;
 
 	@FXML
-	private TableColumn<?, ?> panel5columCorreo;
+	private TableColumn<Proveedor, String> panel5columCorreo;
 
 	@FXML
 	private TextField panel5txtNombreEmpresa;
@@ -353,16 +353,16 @@ public class Controlador implements Initializable {
 	private ImageView panel6imgRegresar;
 
 	@FXML
-	private TableView<?> panel6tablaRRHH;
+	private TableView<Empleado> panel6tablaRRHH;
 
 	@FXML
-	private TableColumn<?, ?> panel6columCodigoEmpleado;
+	private TableColumn<Empleado, String> panel6columCodigoEmpleado;
 
 	@FXML
-	private TableColumn<?, ?> panel6columNombre;
+	private TableColumn<Empleado, String> panel6columNombre;
 
 	@FXML
-	private TableColumn<?, ?> panel6columCargo;
+	private TableColumn<Empleado, String> panel6columCargo;
 
 	@FXML
 	private DatePicker panel6DateFechaNacimiento;
@@ -406,6 +406,8 @@ public class Controlador implements Initializable {
 	Establecimiento establecimiento;
 	
 	ObservableList<ProductoInventario> productosInventario;
+	ObservableList<Empleado> empleados;
+	ObservableList<Proveedor> proveedores;
 	ObservableList<ProductoInventario> productosVenta;
 	
 	@FXML
@@ -420,6 +422,22 @@ public class Controlador implements Initializable {
 		empleado = consulta.autenticar(panel1TxtUsuario.getText(), panel1txtContrasena.getText());
 		panel2txtUsuario.setText(empleado.getUsuario());
 		panel2txtCargo.setText(empleado.getCargo());
+		switch (empleado.getCargo()){
+		case "Administrador":
+			panel2imgRecursosHumanos.setLayoutX(938);
+			panel2imgProveedores.setLayoutX(950);
+			panel2imgInventario.setLayoutX(505);
+			break;
+		case "Cajero":
+			panel2imgRecursosHumanos.setLayoutX(2000);
+			panel2imgProveedores.setLayoutX(2000);
+			panel2imgInventario.setLayoutX(2000);
+			break;
+		default:
+			System.exit(0);
+			break;
+		}
+		
 		panelMenu.setLayoutX(0);
 	}
 
@@ -636,10 +654,18 @@ public class Controlador implements Initializable {
 		
 		this.inicializarTablaInventario();
 		this.inicializarTablaVenta();
+		this.inicializarTablaRecursosHumanos();
+		this.inicializarTablaProveedores();
 		
 		establecimiento = new Establecimiento();
 		for (int i=0;i<establecimiento.getProductos().size();i++) {
 			productosInventario.add(establecimiento.getProductos().get(i));
+		}
+		for (int i=0;i<establecimiento.getEmpleados().size();i++) {
+			empleados.add(establecimiento.getEmpleados().get(i));
+		}
+		for (int i=0;i<establecimiento.getProveedores().size();i++) {
+			proveedores.add(establecimiento.getProveedores().get(i));
 		}
 	}
 	
@@ -666,5 +692,24 @@ public class Controlador implements Initializable {
 		productosInventario = FXCollections.observableArrayList();
 		panel4tablaInventario.setItems(productosInventario);
 	}
+	
+	private void inicializarTablaRecursosHumanos() {
+		panel6columCodigoEmpleado.setCellValueFactory(new PropertyValueFactory<Empleado, String>("codigo"));
+		panel6columNombre.setCellValueFactory(new PropertyValueFactory<Empleado, String>("nombre"));
+		panel6columCargo.setCellValueFactory(new PropertyValueFactory<Empleado, String>("cargo"));
+		empleados = FXCollections.observableArrayList();
+		panel6tablaRRHH.setItems(empleados);
+	}
+	
+	private void inicializarTablaProveedores() {
+		panel5columCP.setCellValueFactory(new PropertyValueFactory<Proveedor, String>("idProveedor"));
+		panel5columNombreEmpresa.setCellValueFactory(new PropertyValueFactory<Proveedor, String>("nombre"));
+		panel5columTelefono.setCellValueFactory(new PropertyValueFactory<Proveedor, String>("telefono"));
+		panel5columDireccion.setCellValueFactory(new PropertyValueFactory<Proveedor, String>("direccion"));
+		panel5columCorreo.setCellValueFactory(new PropertyValueFactory<Proveedor, String>("correo"));
+		proveedores = FXCollections.observableArrayList();
+		panel5tablaProveedores.setItems(proveedores);
+	}
+
 
 }

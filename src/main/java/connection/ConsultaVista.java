@@ -16,13 +16,12 @@ public class ConsultaVista {
 	static final String USERNAME = DbPropertiesReader.getString("db.user");
 	static final String PASSWORD = DbPropertiesReader.getString("db.password");
 
-
 	public static void main(String args[]) {
 	}
-	
+
 	public static Empleado autenticar(String usuario, String contrasena) {
 		Empleado empleado = new Empleado();
-		
+
 		// connect to database books and query database
 		try {
 			// specify properties of JdbcRowSet
@@ -31,27 +30,26 @@ public class ConsultaVista {
 			rowSet.setUsername(USERNAME); // set username
 			rowSet.setPassword(PASSWORD); // set password
 			System.out.println("--------------------------------------------------");
-			rowSet.setCommand("SELECT * FROM Empleado where Usuario = '"+usuario+"'"); // set query
+			rowSet.setCommand("SELECT * FROM Empleado where Usuario = '" + usuario + "'"); // set query
 			rowSet.execute(); // execute query
 
 			rowSet.next();
-			//System.out.printf(rowSet.getString(10));
+			// System.out.printf(rowSet.getString(10));
 			System.err.println("USUARIO NO ENCONTRADO");
 			if (contrasena.equals(rowSet.getString(10))) {
 				empleado.setUsuario(rowSet.getString(9));
 				empleado.setCargo(rowSet.getString(7));
 			}
 			rowSet.close();
-		} 
-		catch (SQLException sqlException) {
+		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
 			System.exit(1);
 		}
 		return empleado;
 	}
-	
+
 	public static ArrayList<Empleado> consultaEmpleados() {
-			
+
 		ArrayList<Empleado> empleados = new ArrayList<Empleado>();
 		// connect to database books and query database
 		try {
@@ -80,21 +78,19 @@ public class ConsultaVista {
 				persona.setContrasena(rowSet.getString(10));
 				empleados.add(persona);
 			}
-			
-			rowSet.close();		
-		} 
-		catch (SQLException sqlException) {
+
+			rowSet.close();
+		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
 			System.exit(1);
 		}
 		return empleados;
 	}
-	
+
 	public static ArrayList<ProductoInventario> consultaInventario() {
-		
+
 		ArrayList<ProductoInventario> productos = new ArrayList<ProductoInventario>();
-		
-		
+
 		// connect to database books and query database
 		try {
 			// specify properties of JdbcRowSet
@@ -110,7 +106,7 @@ public class ConsultaVista {
 			int numberOfColumns = metaData.getColumnCount();
 			while (rowSet.next()) {
 				ProductoInventario producto = new ProductoInventario();
-				
+
 				producto.setIdProducto(rowSet.getString(1));
 				producto.setNombre(rowSet.getString(2));
 				producto.setMarca(rowSet.getString(3));
@@ -119,17 +115,49 @@ public class ConsultaVista {
 				producto.setUnidades(rowSet.getInt(6));
 				producto.setFechaVencimiento(rowSet.getString(7));
 				producto.setPrecio(rowSet.getDouble(8));
-				
+
 				productos.add(producto);
 			}
-			
-			rowSet.close();		
-		} 
-		catch (SQLException sqlException) {
+
+			rowSet.close();
+		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
 			System.exit(1);
 		}
-		System.out.println("Productos consultados");
 		return productos;
-	} 
-} 
+	}
+	
+	public static ArrayList<Proveedor> consultaProveedores() {
+
+		ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
+		// connect to database books and query database
+		try {
+			// specify properties of JdbcRowSet
+			JdbcRowSet rowSet = new JdbcRowSetImpl();
+			rowSet.setUrl(DATABASE_URL); // set database URL
+			rowSet.setUsername(USERNAME); // set username
+			rowSet.setPassword(PASSWORD); // set password
+			System.out.println("--------------------------------------------------");
+			rowSet.setCommand("SELECT * FROM Proveedor"); // set query
+			rowSet.execute(); // execute query
+
+			ResultSetMetaData metaData = rowSet.getMetaData();
+			int numberOfColumns = metaData.getColumnCount();
+			while (rowSet.next()) {
+				Proveedor persona = new Proveedor();
+				persona.setIdProveedor(rowSet.getString(1));
+				persona.setNombre(rowSet.getString(2));
+				persona.setTelefono(rowSet.getString(3));
+				persona.setDireccion(rowSet.getString(4));
+				persona.setCorreo(rowSet.getString(5));
+				proveedores.add(persona);
+			}
+			
+			rowSet.close();
+		} catch (SQLException sqlException) {
+			sqlException.printStackTrace();
+			System.exit(1);
+		}
+		return proveedores;
+	}
+}

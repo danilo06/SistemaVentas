@@ -20,6 +20,7 @@ public class Establecimiento {
     	ConsultaVista baseDatos = new ConsultaVista();
     	productos = baseDatos.consultaInventario();
     	empleados = baseDatos.consultaEmpleados();
+    	proveedores = baseDatos.consultaProveedores();
     	
     	InsertarTabla = new InsertTable();
     	
