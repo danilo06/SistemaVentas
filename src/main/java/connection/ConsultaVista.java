@@ -19,7 +19,30 @@ public class ConsultaVista {
 	public static void main(String args[]) {
 	}
 
-	public static Empleado autenticar(String usuario, String contrasena) {
+	public static boolean autenticarEmpleado(String usuario, String contrasena) {
+		boolean respuesta = false;
+		try {
+			// specify properties of JdbcRowSet
+			JdbcRowSet rowSet = new JdbcRowSetImpl();
+			JdbcRowSet rowSetaux = new JdbcRowSetImpl();
+			rowSet.setUrl(DATABASE_URL); // set database URL
+			rowSet.setUsername(USERNAME); // set username
+			rowSet.setPassword(PASSWORD); // set password
+			rowSet.setCommand("SELECT * FROM Empleado where Usuario = '" + usuario + "'"); // set query
+			rowSet.execute(); // execute query
+			while(rowSet.next()) {
+				if (contrasena.equals(rowSet.getString(10))) {
+					respuesta = true;
+				}
+			}
+			rowSet.close();
+		} catch (SQLException sqlException) {
+			sqlException.printStackTrace();
+		}
+		return respuesta;
+	}
+
+	public static Empleado consultarEmpleado(String usuario, String contrasena) {
 		Empleado empleado = new Empleado();
 
 		// connect to database books and query database
@@ -29,13 +52,10 @@ public class ConsultaVista {
 			rowSet.setUrl(DATABASE_URL); // set database URL
 			rowSet.setUsername(USERNAME); // set username
 			rowSet.setPassword(PASSWORD); // set password
-			System.out.println("--------------------------------------------------");
 			rowSet.setCommand("SELECT * FROM Empleado where Usuario = '" + usuario + "'"); // set query
 			rowSet.execute(); // execute query
 
 			rowSet.next();
-			// System.out.printf(rowSet.getString(10));
-			System.err.println("USUARIO NO ENCONTRADO");
 			if (contrasena.equals(rowSet.getString(10))) {
 				empleado.setUsuario(rowSet.getString(9));
 				empleado.setCargo(rowSet.getString(7));
@@ -43,7 +63,6 @@ public class ConsultaVista {
 			rowSet.close();
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
-			System.exit(1);
 		}
 		return empleado;
 	}
@@ -58,12 +77,10 @@ public class ConsultaVista {
 			rowSet.setUrl(DATABASE_URL); // set database URL
 			rowSet.setUsername(USERNAME); // set username
 			rowSet.setPassword(PASSWORD); // set password
-			System.out.println("--------------------------------------------------");
 			rowSet.setCommand("SELECT * FROM Empleado"); // set query
 			rowSet.execute(); // execute query
 
 			ResultSetMetaData metaData = rowSet.getMetaData();
-			int numberOfColumns = metaData.getColumnCount();
 			while (rowSet.next()) {
 				Empleado persona = new Empleado();
 				persona.setCodigo(rowSet.getString(1));
@@ -98,12 +115,10 @@ public class ConsultaVista {
 			rowSet.setUrl(DATABASE_URL); // set database URL
 			rowSet.setUsername(USERNAME); // set username
 			rowSet.setPassword(PASSWORD); // set password
-			System.out.println("--------------------------------------------------");
 			rowSet.setCommand("SELECT * FROM Inventario"); // set query
 			rowSet.execute(); // execute query
 
 			ResultSetMetaData metaData = rowSet.getMetaData();
-			int numberOfColumns = metaData.getColumnCount();
 			while (rowSet.next()) {
 				ProductoInventario producto = new ProductoInventario();
 
@@ -126,7 +141,7 @@ public class ConsultaVista {
 		}
 		return productos;
 	}
-	
+
 	public static ArrayList<Proveedor> consultaProveedores() {
 
 		ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
@@ -137,12 +152,10 @@ public class ConsultaVista {
 			rowSet.setUrl(DATABASE_URL); // set database URL
 			rowSet.setUsername(USERNAME); // set username
 			rowSet.setPassword(PASSWORD); // set password
-			System.out.println("--------------------------------------------------");
 			rowSet.setCommand("SELECT * FROM Proveedor"); // set query
 			rowSet.execute(); // execute query
 
 			ResultSetMetaData metaData = rowSet.getMetaData();
-			int numberOfColumns = metaData.getColumnCount();
 			while (rowSet.next()) {
 				Proveedor persona = new Proveedor();
 				persona.setIdProveedor(rowSet.getString(1));
@@ -152,7 +165,7 @@ public class ConsultaVista {
 				persona.setCorreo(rowSet.getString(5));
 				proveedores.add(persona);
 			}
-			
+
 			rowSet.close();
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();

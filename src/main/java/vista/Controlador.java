@@ -420,28 +420,32 @@ public class Controlador implements Initializable {
 
 	@FXML
 	void panel1btnInicioAction(ActionEvent event) {
-		ConsultaVista consulta = new ConsultaVista();
-		Empleado empleado = new Empleado();
-		empleado = consulta.autenticar(panel1TxtUsuario.getText(), panel1txtContrasena.getText());
-		panel2txtUsuario.setText(empleado.getUsuario());
-		panel2txtCargo.setText(empleado.getCargo());
-		switch (empleado.getCargo()) {
-		case "Administrador":
-			panel2imgRecursosHumanos.setLayoutX(938);
-			panel2imgProveedores.setLayoutX(950);
-			panel2imgInventario.setLayoutX(505);
-			break;
-		case "Cajero":
-			panel2imgRecursosHumanos.setLayoutX(2000);
-			panel2imgProveedores.setLayoutX(2000);
-			panel2imgInventario.setLayoutX(2000);
-			break;
-		default:
-			System.exit(0);
-			break;
+		if (ConsultaVista.autenticarEmpleado(panel1TxtUsuario.getText(), panel1txtContrasena.getText())) {
+			Empleado empleado = new Empleado();
+			empleado = ConsultaVista.consultarEmpleado(panel1TxtUsuario.getText(), panel1txtContrasena.getText());
+			panel2txtUsuario.setText(empleado.getUsuario());
+			panel2txtCargo.setText(empleado.getCargo());
+			switch (empleado.getCargo()) {
+			case "Administrador":
+				panel2imgRecursosHumanos.setLayoutX(938);
+				panel2imgProveedores.setLayoutX(950);
+				panel2imgInventario.setLayoutX(505);
+				break;
+			case "Cajero":
+				panel2imgRecursosHumanos.setLayoutX(2000);
+				panel2imgProveedores.setLayoutX(2000);
+				panel2imgInventario.setLayoutX(2000);
+				break;
+			default:
+				System.exit(0);
+				break;
+			}
+			panelMenu.setLayoutX(0);
+		}else {
+			System.out.println("Empleado no encontrado");
+			
 		}
-
-		panelMenu.setLayoutX(0);
+		
 	}
 
 	@FXML
@@ -709,8 +713,8 @@ public class Controlador implements Initializable {
 		this.inicializarTablaVenta();
 		this.inicializarTablaRecursosHumanos();
 		this.inicializarTablaProveedores();
-
 		establecimiento = new Establecimiento();
+		/*
 		for (int i = 0; i < establecimiento.getProductos().size(); i++) {
 			productosInventario.add(establecimiento.getProductos().get(i));
 		}
@@ -720,6 +724,7 @@ public class Controlador implements Initializable {
 		for (int i = 0; i < establecimiento.getProveedores().size(); i++) {
 			proveedores.add(establecimiento.getProveedores().get(i));
 		}
+		*/
 	}
 
 	private void inicializarTablaVenta() {

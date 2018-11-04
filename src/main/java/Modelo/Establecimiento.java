@@ -18,11 +18,13 @@ public class Establecimiento {
     	direccion = "Calle 6 #12-45";
     	iva =0.19;
     	ConsultaVista baseDatos = new ConsultaVista();
-    	productos = baseDatos.consultaInventario();
-    	empleados = baseDatos.consultaEmpleados();
-    	proveedores = baseDatos.consultaProveedores();
-    	
+    	/*
+    	productos = ConsultaVista.consultaInventario();
+    	empleados = ConsultaVista.consultaEmpleados();
+    	proveedores = ConsultaVista.consultaProveedores();
     	InsertarTabla = new InsertTable();
+    	
+    	*/
     	
     }
 
