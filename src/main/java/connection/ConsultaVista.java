@@ -6,6 +6,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.sql.RowSet;
 import javax.sql.rowset.JdbcRowSet;
 import com.sun.rowset.JdbcRowSetImpl; // Sun's JdbcRowSet implementation
 import Modelo.*;
@@ -41,7 +42,30 @@ public class ConsultaVista {
 		}
 		return respuesta;
 	}
-
+	
+	public static boolean autenticarProveedor(String idproveedor) {
+		boolean ans = false;
+		try {
+			JdbcRowSet rowSet = new JdbcRowSetImpl();
+			JdbcRowSet rowSetaux = new JdbcRowSetImpl();
+			rowSet.setUrl(DATABASE_URL); // set database URL
+			rowSet.setUsername(USERNAME); // set username
+			rowSet.setPassword(PASSWORD); // set password
+			rowSet.setCommand("SELECT * FROM Proveedor where "); // set query
+			rowSet.execute(); // execute query
+			while(rowSet.next()) {
+				if(idproveedor != rowSet.getString(1)) {
+					ans = true;
+				}
+			}
+			rowSet.close();
+		}catch (SQLException sqlException) {
+			sqlException.printStackTrace();
+		}
+		return ans;
+	}
+	
+	
 	public static Empleado consultarEmpleado(String usuario, String contrasena) {
 		Empleado empleado = new Empleado();
 
@@ -173,4 +197,6 @@ public class ConsultaVista {
 		}
 		return proveedores;
 	}
+
+	
 }

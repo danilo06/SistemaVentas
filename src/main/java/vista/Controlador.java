@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -22,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.StageStyle;
 
 public class Controlador implements Initializable {
 
@@ -399,6 +402,8 @@ public class Controlador implements Initializable {
 
 	@FXML
 	private ComboBox<String> panel6cboxCargo;
+	
+	
 
 	@FXML
 	private TextField panel6txtUsuario;
@@ -443,6 +448,13 @@ public class Controlador implements Initializable {
 			panelMenu.setLayoutX(0);
 		}else {
 			System.out.println("Empleado no encontrado");
+			Alert dialogoAlerta = new Alert(AlertType.ERROR);
+			dialogoAlerta.setTitle("!ERROR!");
+			dialogoAlerta.setHeaderText("¡ERROR! LogIn");
+			dialogoAlerta.setContentText("ha ingresado el usuario y/o contraseña erroenos, intente nuevamente");
+			dialogoAlerta.initStyle(StageStyle.UTILITY);
+			java.awt.Toolkit.getDefaultToolkit().beep();
+			dialogoAlerta.showAndWait();
 			
 		}
 		
@@ -605,8 +617,21 @@ public class Controlador implements Initializable {
 		System.out.println("-----------------------");
 		System.out.println(panel5txtCodigoProveedor.getText());
 		System.out.println("-----------------------");
+		if(ConsultaVista.autenticarProveedor(panel5txtCodigoProveedor.getText())) {
 		proveedores.add(proveedor);
 		establecimiento.agregarProveedor(proveedor);
+		}
+		else
+		{
+			System.out.println("proveedor repetido!");
+			Alert dialogoAlerta = new Alert(AlertType.ERROR);
+			dialogoAlerta.setTitle("!ERROR!");
+			dialogoAlerta.setHeaderText("¡ERROR! Aregar Proveedor");
+			dialogoAlerta.setContentText("ha ingresado un proveedor existente, por favor revise e intente de nuevo");
+			dialogoAlerta.initStyle(StageStyle.UTILITY);
+			java.awt.Toolkit.getDefaultToolkit().beep();
+			dialogoAlerta.showAndWait();
+		}
 		//Aun falta que se agregue el codigo del proveedor al elemento.
 	}
 
