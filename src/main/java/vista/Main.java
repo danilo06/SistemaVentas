@@ -6,7 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+/**
+ * Declaracion de la clase Main
+ * @author Danilo Beleño, Sebastian Suarez, Jose Buitrago, Andres Barragan
+ * @version 15/11/2018
+ */
 public class Main extends Application {
 	@Override
 	public void start(Stage PrimaryStage) throws Exception {
