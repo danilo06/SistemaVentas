@@ -794,8 +794,8 @@ public class Controlador implements Initializable {
 			System.out.println("proveedor repetido!");
 			Alert dialogoAlerta = new Alert(AlertType.ERROR);
 			dialogoAlerta.setTitle("!ERROR!");
-			dialogoAlerta.setHeaderText("¡ERROR! Aregar Proveedor");
-			dialogoAlerta.setContentText("ha ingresado un proveedor existente, por favor revise e intente de nuevo");
+			dialogoAlerta.setHeaderText("¡ERROR! Aregar Empleado");
+			dialogoAlerta.setContentText("ha ingresado un empleado existente, por favor revise e intente de nuevo");
 			dialogoAlerta.initStyle(StageStyle.UTILITY);
 			java.awt.Toolkit.getDefaultToolkit().beep();
 			dialogoAlerta.showAndWait();
