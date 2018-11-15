@@ -713,12 +713,6 @@ public class Controlador implements Initializable {
 		System.out.println(panel5txtCodigoProveedor.getText());
 		System.out.println("-----------------------");
 		if(ConsultaVista.autenticarProveedor(panel5txtCodigoProveedor.getText())) {    //agrega al nuevo proveedor mediante el if 
-		proveedores.add(proveedor);
-		establecimiento.agregarProveedor(proveedor);
-		}
-		//Verifica que el proveedor no se encuentre registrado en el sistema
-		else
-		{
 			System.out.println("proveedor repetido!");
 			Alert dialogoAlerta = new Alert(AlertType.ERROR);
 			dialogoAlerta.setTitle("!ERROR!");
@@ -727,6 +721,13 @@ public class Controlador implements Initializable {
 			dialogoAlerta.initStyle(StageStyle.UTILITY);
 			java.awt.Toolkit.getDefaultToolkit().beep();
 			dialogoAlerta.showAndWait();
+		
+		}
+		//Verifica que el proveedor no se encuentre registrado en el sistema
+		else
+		{
+			proveedores.add(proveedor);
+			establecimiento.agregarProveedor(proveedor);
 		}
 		//Aun falta que se agregue el codigo del proveedor al elemento.
 	}
@@ -788,8 +789,23 @@ public class Controlador implements Initializable {
 		persona.setCargo(panel6cboxCargo.getValue().toString());
 		persona.setUsuario(panel6txtUsuario.getText());
 		persona.setContrasena(panel6txtContrasena.getText());
-		empleados.add(persona);
 		
+		if(ConsultaVista.EmpleadoRepetido(panel6txtCodigoEmpleado.getText())) {    //agrega al nuevo proveedor mediante el if 
+			System.out.println("proveedor repetido!");
+			Alert dialogoAlerta = new Alert(AlertType.ERROR);
+			dialogoAlerta.setTitle("!ERROR!");
+			dialogoAlerta.setHeaderText("¡ERROR! Aregar Proveedor");
+			dialogoAlerta.setContentText("ha ingresado un proveedor existente, por favor revise e intente de nuevo");
+			dialogoAlerta.initStyle(StageStyle.UTILITY);
+			java.awt.Toolkit.getDefaultToolkit().beep();
+			dialogoAlerta.showAndWait();
+		
+		}
+		//Verifica que el proveedor no se encuentre registrado en el sistema
+		else
+		{
+			empleados.add(persona);
+		}
 		//Falta subir la informacion a la Base de datos.
 	}
 

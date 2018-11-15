@@ -69,10 +69,10 @@ public class ConsultaVista {
 			rowSet.setUrl(DATABASE_URL); // set database URL
 			rowSet.setUsername(USERNAME); // set username
 			rowSet.setPassword(PASSWORD); // set password
-			rowSet.setCommand("SELECT * FROM Proveedor where "); // set query
+			rowSet.setCommand("SELECT * FROM Proveedor where ID_proveedor = '"+idproveedor+"'"); // set query
 			rowSet.execute(); // execute query
 			while(rowSet.next()) {
-				if(idproveedor != rowSet.getString(1)) {
+				if(idproveedor.equals(rowSet.getString(1))) {
 					ans = true;
 				}
 			}
@@ -81,6 +81,28 @@ public class ConsultaVista {
 			sqlException.printStackTrace();
 		}
 		return ans;
+	}
+	
+	public static boolean EmpleadoRepetido(String codigoEmpleado) {
+		boolean cons = false;
+		try {
+			JdbcRowSet rowSet = new JdbcRowSetImpl();
+			JdbcRowSet rowSetaux = new JdbcRowSetImpl();
+			rowSet.setUrl(DATABASE_URL); // set database URL
+			rowSet.setUsername(USERNAME); // set username
+			rowSet.setPassword(PASSWORD); // set password
+			rowSet.setCommand("SELECT * FROM Proveedor where Codigo = '"+codigoEmpleado+"'"); // set query
+			rowSet.execute(); // execute query
+			while(rowSet.next()) {
+				if(codigoEmpleado.equals(rowSet.getString(6))) {
+					cons = true;
+				}
+			}
+			rowSet.close();
+		}catch (SQLException sqlException) {
+			sqlException.printStackTrace();
+		}
+		return cons;
 	}
 	/**
 	 * Metodo para consultar empleados
