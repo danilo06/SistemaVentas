@@ -530,11 +530,7 @@ public class Controlador implements Initializable {
 			if (aux==0) {
 					productosVenta.add(producto);
 				}
-			System.out.println(productosVenta.size());
-			System.out.println("-> "+productosVenta.get(0).getUnidades());
-			
 			producto.generarTotal();
-			
 			panel3btnPagar.setDisable(false);
 			panel3btnEliminar.setDisable(false);
 			panel3btnNuevaCompra.setDisable(false);
