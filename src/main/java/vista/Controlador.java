@@ -423,13 +423,18 @@ public class Controlador implements Initializable {
 	ObservableList<ProductoInventario> productosVenta;
 
 	@FXML
+	/**
+	 * Creacion del metodo Cerrar
+	 * @param event, permite cerrar la ventana, en donde actualmete se trabaja, este metodo sirve para cada 
+	 * uno de los paneles hechos en la aplicacion
+	 */
 	void panel1btnCerrarAction(ActionEvent event) {
 		System.exit(0);
 	}
 
 	@FXML
 	/**
-	 * Creacion dek metodo panel1btnInicioAction
+	 * Creacion del metodo panel1btnInicioAction
 	 * @param event, para verificar los usuarion que ingresan al sistema, si se encuentran registrados o no.
 	 */
 	void panel1btnInicioAction(ActionEvent event) {
@@ -540,6 +545,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Cerrar
+	 * @param event, permite cerrar la ventana, en donde actualmete se trabaja, este metodo sirve para cada 
+	 * uno de los paneles hechos en la aplicacion
+	 */
 	void panel3btnCerrarAction(ActionEvent event) {
 		System.exit(0);
 	}
@@ -589,6 +599,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Regresar
+	 * @param event, permite retroceder entre ventanas, esta habilitada en todos los paneles de navegacion, 
+	 * de esta aplicacion
+	 */
 	void panel3imgRegresarAction(MouseEvent event) {
 		panelVenta.setLayoutX(2000);
 	}
@@ -633,6 +648,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Regresar
+	 * @param event, permite retroceder entre ventanas, esta habilitada en todos los paneles de navegacion, 
+	 * de esta aplicacion
+	 */
 	void panel4imgRegresarAction(MouseEvent event) {
 		panelInventario.setLayoutX(2000);
 	}
@@ -708,6 +728,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Regresar
+	 * @param event, permite retroceder entre ventanas, esta habilitada en todos los paneles de navegacion, 
+	 * de esta aplicacion
+	 */
 	void panel5imgRegresarAction(MouseEvent event) {
 		panelProveedor.setLayoutX(2000);
 	}
@@ -755,6 +780,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Regresar
+	 * @param event, permite retroceder entre ventanas, esta habilitada en todos los paneles de navegacion, 
+	 * de esta aplicacion
+	 */
 	void panel6imgRegresarAction(MouseEvent event) {
 		panelRecursosHumanos.setLayoutX(2000);
 	}
