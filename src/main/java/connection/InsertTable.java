@@ -5,20 +5,26 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
+/**
+ * Esta clase permite la insercion de nuevos datos, como lo es producto a inventario y proveedor
+ * @author Danilo Beleño, Sebastian Suarez, Jose Buitrago, Andres Barragan
+ *@version 15/11/2018
+ */
 
 public class InsertTable {
 	private static final String URL = DbPropertiesReader.getString("db.url");
 	static final String USERNAME = DbPropertiesReader.getString("db.user");
 	static final String PASSWORD = DbPropertiesReader.getString("db.password");
-	
+	// Declaracion de los atributos privados
 	private Connection connection = null; // manages connection
 	private PreparedStatement insertNewProductoInventario = null;
 	private PreparedStatement insertNewsProveedor = null;
 	private PreparedStatement insertNewcommissionEmployee = null;
 	private PreparedStatement insertNewbasePlusCommissionEmployee = null;
 	private PreparedStatement insertNewhourlyEmployee = null;
-	
+	/**
+	 * Incersion de datos a las respectivas tablas
+	 */
 	public InsertTable() {
 		try {
 			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -40,6 +46,18 @@ public class InsertTable {
 			System.exit(1);
 		} // end catch
 	} // end PersonQueries constructor
+	/**
+	 * 
+	 * @param idProducto
+	 * @param nombre
+	 * @param marca
+	 * @param categoria
+	 * @param contenido
+	 * @param unidades
+	 * @param fechaVencimiento
+	 * @param precio
+	 * @return resultado de la incersion
+	 */
 	public int addProductoInventario(String idProducto, String nombre, String marca, String categoria, String contenido, int unidades, String fechaVencimiento, Double precio ) {
 		int result = 0;
 		try {
@@ -60,6 +78,15 @@ public class InsertTable {
 		}
 		return result;
 	}
+	/**
+	 * 
+	 * @param idProveedor
+	 * @param nombre_empresa
+	 * @param telefono
+	 * @param direccion
+	 * @param correo
+	 * @return ingreso de un nuevo proveedor
+	 */
 	public int addProveedor(String idProveedor, String nombre_empresa , String telefono, String direccion, String correo) {
 		int result = 0;
 		try {
@@ -78,40 +105,10 @@ public class InsertTable {
 		}
 		return result;
 	}
-	public int addCommissionEmployee(String socialNumber, int grossSales, float commissionRate, float bonus) {
-		int result = 0;
-		try {
-			insertNewcommissionEmployee.setString(1, socialNumber);
-			insertNewcommissionEmployee.setInt(2, grossSales);
-			insertNewcommissionEmployee.setFloat(3, commissionRate);
-			insertNewcommissionEmployee.setFloat(4, bonus);
-			result = insertNewcommissionEmployee.executeUpdate();
-		}
-		catch (SQLException sqlException) {
-			sqlException.printStackTrace();
-			close();
-		}
-		return result;
-	}
-
-	public int addBasePlusCommissionEmployee(String socialNumber,int grossSales, float commissionRate, float baseSalary, float bonus) {
-		int result = 0;
-		try {
-			insertNewbasePlusCommissionEmployee.setString(1, socialNumber);
-			insertNewbasePlusCommissionEmployee.setInt(2, grossSales);
-			insertNewbasePlusCommissionEmployee.setFloat(3, commissionRate);
-			insertNewbasePlusCommissionEmployee.setFloat(4, baseSalary);
-			insertNewbasePlusCommissionEmployee.setFloat(5, bonus);
-			result = insertNewbasePlusCommissionEmployee.executeUpdate();
-		}
-		catch (SQLException sqlException) {
-			sqlException.printStackTrace();
-			close();
-		}
-		return result;
-	}
 	
-	
+	/**
+	 * Cierre de la conexion
+	 */
 	public void close() {
 		try {
 			connection.close();
