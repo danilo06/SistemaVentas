@@ -18,13 +18,11 @@ public class Establecimiento {
     	direccion = "Calle 6 #12-45";
     	iva =0.19;
     	ConsultaVista baseDatos = new ConsultaVista();
-    	/*
     	productos = ConsultaVista.consultaInventario();
     	empleados = ConsultaVista.consultaEmpleados();
     	proveedores = ConsultaVista.consultaProveedores();
     	InsertarTabla = new InsertTable();
     	
-    	*/
     	
     }
 
@@ -157,7 +155,7 @@ public class Establecimiento {
     
 	public int buscarProducto(String idProducto) {
 		for (int i=0;i<productos.size();i++) {
-			if (productos.get(i).getIdProducto().equals(idProducto)) {
+			if (productos.get(i).getIdProducto().equals(idProducto) || productos.get(i).getUnidades()>0) {
 				return 1;
 			}
 		}
@@ -169,6 +167,9 @@ public class Establecimiento {
 		for (int i=0;i<productos.size();i++) {
 			if (productos.get(i).getIdProducto().equals(id)) {
 				producto = productos.get(i);
+				System.out.println("actual"+productos.get(i).getUnidades());
+				productos.get(i).setUnidades(producto.getUnidades()-1);
+				System.out.println("nuevo"+productos.get(i).getUnidades());
 			}
 		}
 		producto.setUnidades(1);

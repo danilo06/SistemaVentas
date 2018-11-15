@@ -3,9 +3,7 @@ package vista;
 import java.net.URL;
 import Modelo.*;
 import connection.*;
-
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -402,8 +400,6 @@ public class Controlador implements Initializable {
 
 	@FXML
 	private ComboBox<String> panel6cboxCargo;
-	
-	
 
 	@FXML
 	private TextField panel6txtUsuario;
@@ -447,17 +443,14 @@ public class Controlador implements Initializable {
 			}
 			panelMenu.setLayoutX(0);
 		}else {
-			System.out.println("Empleado no encontrado");
 			Alert dialogoAlerta = new Alert(AlertType.ERROR);
-			dialogoAlerta.setTitle("!ERROR!");
-			dialogoAlerta.setHeaderText("¡ERROR! LogIn");
-			dialogoAlerta.setContentText("ha ingresado el usuario y/o contraseña erroenos, intente nuevamente");
+			dialogoAlerta.setTitle("!ERROR111!");
+			dialogoAlerta.setHeaderText("¡ERROR! LogIn222");
+			dialogoAlerta.setContentText("ha ingresado el usuario y/o contraseña erroenos, intente nuevamente3333333333");
 			dialogoAlerta.initStyle(StageStyle.UTILITY);
 			java.awt.Toolkit.getDefaultToolkit().beep();
 			dialogoAlerta.showAndWait();
-			
 		}
-		
 	}
 
 	@FXML
@@ -494,21 +487,32 @@ public class Controlador implements Initializable {
 
 	@FXML
 	void panel3btnAgregarAction(ActionEvent event) {
-		int valor = establecimiento.buscarProducto(panel3txtAgregarProductoID.getText());
+		int valor = buscarProducto(panel3txtAgregarProductoID.getText());
 		int total = 0;
 		if (valor == 1) {
-			ProductoInventario producto = establecimiento.traerProducto(panel3txtAgregarProductoID.getText());
+			ProductoInventario producto = traerProducto(panel3txtAgregarProductoID.getText());
+			for (int i=0;i<productosVenta.size();i++)
+				if (producto.getIdProducto().equals(productosVenta.get(i).getIdProducto())) {
+					productosVenta.get(i).setUnidades(productosVenta.get(i).getUnidades()+1);
+				}else {
+					productosVenta.add(producto);
+				}
 			productosVenta.add(producto);
+			System.out.println(productosVenta.size());
+			
 			producto.generarTotal();
+			
 			panel3btnPagar.setDisable(false);
 			panel3btnEliminar.setDisable(false);
 			panel3btnNuevaCompra.setDisable(false);
-			System.out.println("Proucto encontrado");
-
-
 		} else {
-			System.out.println("Proucto no encontrado");
-			panel3txtEstadoCompra.setText("Proucto no encontrado");
+			Alert dialogoAlerta = new Alert(AlertType.ERROR);
+			dialogoAlerta.setTitle("!ERROR!");
+			dialogoAlerta.setHeaderText("¡ERROR! Venta");
+			dialogoAlerta.setContentText("Producto no encontrado, verifique inventario");
+			dialogoAlerta.initStyle(StageStyle.UTILITY);
+			java.awt.Toolkit.getDefaultToolkit().beep();
+			dialogoAlerta.showAndWait();
 		}
 		for (int i = 0; i < productosVenta.size(); i++) {
 			total += productosVenta.get(i).getPrecio();
@@ -517,6 +521,31 @@ public class Controlador implements Initializable {
 		panel3txtTotalCompra.setText(String.valueOf(total));
 		panel3txtEstadoCompra.setText("");
 	}
+	
+	public int buscarProducto(String idProducto) {
+		int valor =0;
+		for (int i=0;i<productosInventario.size();i++) {
+			if (productosInventario.get(i).getIdProducto().equals(idProducto)) {
+				valor=1;
+			}
+		}
+		return valor;
+	}
+	
+	
+	
+	public ProductoInventario traerProducto(String idProducto) {
+		ProductoInventario producto = null;
+		for (int i=0;i<productosInventario.size();i++) {
+			if (productosInventario.get(i).getIdProducto().equals(idProducto)) {
+				producto = productosInventario.get(i);
+				productosInventario.get(i).setUnidades((producto.getUnidades())-1);
+			}
+		}
+		producto.setUnidades(1);
+		return producto;
+	}
+	
 
 	@FXML
 	void panel3btnCerrarAction(ActionEvent event) {
@@ -739,7 +768,7 @@ public class Controlador implements Initializable {
 		this.inicializarTablaRecursosHumanos();
 		this.inicializarTablaProveedores();
 		establecimiento = new Establecimiento();
-		/*
+		
 		for (int i = 0; i < establecimiento.getProductos().size(); i++) {
 			productosInventario.add(establecimiento.getProductos().get(i));
 		}
@@ -749,7 +778,7 @@ public class Controlador implements Initializable {
 		for (int i = 0; i < establecimiento.getProveedores().size(); i++) {
 			proveedores.add(establecimiento.getProveedores().get(i));
 		}
-		*/
+		
 	}
 
 	private void inicializarTablaVenta() {
