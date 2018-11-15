@@ -12,6 +12,9 @@ import javafx.stage.StageStyle;
  * @version 15/11/2018
  */
 public class Main extends Application {
+	/**
+	 * Inicializa la interfaz la cual contiene los paneles del sistema para poder trabajar
+	 */
 	@Override
 	public void start(Stage PrimaryStage) throws Exception {
 	    Parent root = FXMLLoader.load(getClass().getResource("/view.fxml"));
