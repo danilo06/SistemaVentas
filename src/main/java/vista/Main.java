@@ -7,11 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 /**
- * Declaracion de la clase Main
+ * Declaracion de la clase Main, Clase principal del sistema
  * @author Danilo Beleño, Sebastian Suarez, Jose Buitrago, Andres Barragan
  * @version 15/11/2018
  */
 public class Main extends Application {
+	/**
+	 * Inicializa la interfaz la cual contiene los paneles del sistema para poder trabajar
+	 */
 	@Override
 	public void start(Stage PrimaryStage) throws Exception {
 	    Parent root = FXMLLoader.load(getClass().getResource("/view.fxml"));
@@ -21,7 +24,10 @@ public class Main extends Application {
 	    //PrimaryStage.setFullScreen(true);
 	    PrimaryStage.show();
 	}
-	
+	/**
+	 * Metodo Principal
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	

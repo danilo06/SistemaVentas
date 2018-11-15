@@ -24,12 +24,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.StageStyle;
 /**
- * 
+ * Esta clase permite trabajar con los paneles con los cuales cuenta la aplicacion
  * @author Danilo Beleño, Sebastian Suarez, Jose Buitrago, Andres Barragan
  *
  */
 public class Controlador implements Initializable {
-
+	//Declaracion de los atributos privados
 	@FXML
 	private AnchorPane panelLogin;
 
@@ -419,16 +419,22 @@ public class Controlador implements Initializable {
 	ObservableList<ProductoInventario> productosVenta;
 
 	@FXML
+	/**
+	 * Creacion del metodo Cerrar
+	 * @param event, permite cerrar la ventana, en donde actualmete se trabaja, este metodo sirve para cada 
+	 * uno de los paneles hechos en la aplicacion
+	 */
 	void panel1btnCerrarAction(ActionEvent event) {
 		System.exit(0);
 	}
 
 	@FXML
 	/**
-	 * Creacion dek metodo panel1btnInicioAction
+	 * Creacion del metodo panel1btnInicioAction
 	 * @param event, para verificar los usuarion que ingresan al sistema, si se encuentran registrados o no.
 	 */
 	void panel1btnInicioAction(ActionEvent event) {
+		//Autentifica si el empleado se encuentra registrado en la base de datos
 		if (ConsultaVista.autenticarEmpleado(panel1TxtUsuario.getText(), panel1txtContrasena.getText())) {
 			Empleado empleado = new Empleado();
 			empleado = ConsultaVista.consultarEmpleado(panel1TxtUsuario.getText(), panel1txtContrasena.getText());
@@ -506,6 +512,8 @@ public class Controlador implements Initializable {
 	/**
 	 * Creacion del metodo panel3btnAgregarAction
 	 * @param event, permite gestionar un producto al establecimiento en el cual esta operando la palicacion
+	 * @param valor,valor ingresado por el usuario, para encontrar un producto
+	 * @param total, mediante un condicional verifica que los datos coincidan con un producto que ya se encuentre registrado
 	 */
 	void panel3btnAgregarAction(ActionEvent event) {
 		int valor = buscarProducto(panel3txtAgregarProductoID.getText());
@@ -573,6 +581,11 @@ public class Controlador implements Initializable {
 	
 
 	@FXML
+	/**
+	 * Creacion del metodo Cerrar
+	 * @param event, permite cerrar la ventana, en donde actualmete se trabaja, este metodo sirve para cada 
+	 * uno de los paneles hechos en la aplicacion
+	 */
 	void panel3btnCerrarAction(ActionEvent event) {
 		System.exit(0);
 	}
@@ -622,6 +635,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Regresar
+	 * @param event, permite retroceder entre ventanas, esta habilitada en todos los paneles de navegacion, 
+	 * de esta aplicacion
+	 */
 	void panel3imgRegresarAction(MouseEvent event) {
 		panelVenta.setLayoutX(2000);
 	}
@@ -666,6 +684,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Regresar
+	 * @param event, permite retroceder entre ventanas, esta habilitada en todos los paneles de navegacion, 
+	 * de esta aplicacion
+	 */
 	void panel4imgRegresarAction(MouseEvent event) {
 		panelInventario.setLayoutX(2000);
 	}
@@ -681,6 +704,7 @@ public class Controlador implements Initializable {
 	 * @param event, permite agregar un proveedor con el cual el establecimiento podra trabajar
 	 */
 	void panel5btnAgregarProveedorAction(ActionEvent event) {
+		// Creacion de un nuevo objeto llamado Proveedor se registraran los datos del nuevo proveedor
 		Proveedor proveedor = new Proveedor();
 		proveedor.setIdProveedor(panel5txtCodigoProveedor.getText());
 		proveedor.setTelefono(panel5txtTelefono.getText());
@@ -692,10 +716,11 @@ public class Controlador implements Initializable {
 		System.out.println("-----------------------");
 		System.out.println(panel5txtCodigoProveedor.getText());
 		System.out.println("-----------------------");
-		if(ConsultaVista.autenticarProveedor(panel5txtCodigoProveedor.getText())) {
+		if(ConsultaVista.autenticarProveedor(panel5txtCodigoProveedor.getText())) {    //agrega al nuevo proveedor mediante el if 
 		proveedores.add(proveedor);
 		establecimiento.agregarProveedor(proveedor);
 		}
+		//Verifica que el proveedor no se encuentre registrado en el sistema
 		else
 		{
 			System.out.println("proveedor repetido!");
@@ -741,6 +766,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Regresar
+	 * @param event, permite retroceder entre ventanas, esta habilitada en todos los paneles de navegacion, 
+	 * de esta aplicacion
+	 */
 	void panel5imgRegresarAction(MouseEvent event) {
 		panelProveedor.setLayoutX(2000);
 	}
@@ -788,6 +818,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Regresar
+	 * @param event, permite retroceder entre ventanas, esta habilitada en todos los paneles de navegacion, 
+	 * de esta aplicacion
+	 */
 	void panel6imgRegresarAction(MouseEvent event) {
 		panelRecursosHumanos.setLayoutX(2000);
 	}

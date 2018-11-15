@@ -10,16 +10,30 @@ import javax.sql.RowSet;
 import javax.sql.rowset.JdbcRowSet;
 import com.sun.rowset.JdbcRowSetImpl; // Sun's JdbcRowSet implementation
 import Modelo.*;
-
+/**
+ * Esta clase permite consultar los datos que ya se encuentrar registrados en la base de datos
+ * y que posteriormente se mostraran en las respectivas vistas
+ * @author Danilo Beleño, Sebastian Suarez, Jose Buitrago, Andres Barragan
+ * @version 15/11/2018
+ *
+ */
 public class ConsultaVista {
 	// JDBC driver name and database URL
 	static final String DATABASE_URL = DbPropertiesReader.getString("db.url");
 	static final String USERNAME = DbPropertiesReader.getString("db.user");
 	static final String PASSWORD = DbPropertiesReader.getString("db.password");
-
+	/**
+	 * Metodo que permite inicializar la clase
+	 * @param args
+	 */
 	public static void main(String args[]) {
 	}
-
+	/**
+	 * 
+	 * @param usuario, usuario que se debe registrar para la base de datos
+	 * @param contrasena, contraseña que se asigna al usuario para que pueda hacer el inicio de sesion
+	 * @return, si ingreso al sistema o no
+	 */
 	public static boolean autenticarEmpleado(String usuario, String contrasena) {
 		boolean respuesta = false;
 		try {
@@ -42,7 +56,11 @@ public class ConsultaVista {
 		}
 		return respuesta;
 	}
-	
+	/**
+	 * Metodo que permite autentificar proveedor
+	 * @param idproveedor, se identificar el proveedor con un id unico
+	 * @return proveedor autentificado
+	 */
 	public static boolean autenticarProveedor(String idproveedor) {
 		boolean ans = false;
 		try {
@@ -64,7 +82,12 @@ public class ConsultaVista {
 		}
 		return ans;
 	}
-	
+	/**
+	 * Metodo para consultar empleados
+	 * @param usuario, usuario que se debe registrar para la base de datos
+	 * @param contrasena, contraseña que se asigna al usuario para que pueda hacer el inicio de sesion
+	 * @return empleado consultado
+	 */
 	
 	public static Empleado consultarEmpleado(String usuario, String contrasena) {
 		Empleado empleado = new Empleado();
@@ -90,7 +113,10 @@ public class ConsultaVista {
 		}
 		return empleado;
 	}
-
+	/**
+	 * 
+	 * @return empleados registrados
+	 */
 	public static ArrayList<Empleado> consultaEmpleados() {
 
 		ArrayList<Empleado> empleados = new ArrayList<Empleado>();
@@ -127,7 +153,10 @@ public class ConsultaVista {
 		}
 		return empleados;
 	}
-
+	/**
+	 * 
+	 * @return productos que se encuentran registrados y ya estan en inventario
+	 */
 	public static ArrayList<ProductoInventario> consultaInventario() {
 
 		ArrayList<ProductoInventario> productos = new ArrayList<ProductoInventario>();
@@ -165,7 +194,10 @@ public class ConsultaVista {
 		}
 		return productos;
 	}
-
+	/**
+	 * 
+	 * @return Proeedores registrados
+	 */
 	public static ArrayList<Proveedor> consultaProveedores() {
 
 		ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
