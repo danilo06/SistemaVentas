@@ -21,7 +21,10 @@ public class Main extends Application {
 	    //PrimaryStage.setFullScreen(true);
 	    PrimaryStage.show();
 	}
-	
+	/**
+	 * Metodo Principal
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	
