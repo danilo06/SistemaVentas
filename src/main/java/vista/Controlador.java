@@ -23,7 +23,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.StageStyle;
-
+/**
+ * 
+ * @author Danilo Beleño, Sebastian Suarez, Jose Buitrago, Andres Barragan
+ *
+ */
 public class Controlador implements Initializable {
 
 	@FXML
@@ -420,6 +424,10 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion dek metodo panel1btnInicioAction
+	 * @param event, para verificar los usuarion que ingresan al sistema, si se encuentran registrados o no.
+	 */
 	void panel1btnInicioAction(ActionEvent event) {
 		if (ConsultaVista.autenticarEmpleado(panel1TxtUsuario.getText(), panel1txtContrasena.getText())) {
 			Empleado empleado = new Empleado();
@@ -454,11 +462,20 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Cerrar
+	 * @param event, permite cerrar la ventana, en donde actualmete se trabaja, este metodo sirve para cada 
+	 * uno de los paneles hechos en la aplicacion
+	 */
 	void panel2btnCerrarAction(ActionEvent event) {
 		System.exit(0);
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo panel2btnCerrarSesionAction
+	 * @param event, permite cerrar sesion en la aplicacion
+	 */
 	void panel2btnCerrarSesionAction(ActionEvent event) {
 		panelMenu.setLayoutX(2000);
 		panel1TxtUsuario.clear();
@@ -486,6 +503,10 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo panel3btnAgregarAction
+	 * @param event, permite gestionar un producto al establecimiento en el cual esta operando la palicacion
+	 */
 	void panel3btnAgregarAction(ActionEvent event) {
 		int valor = buscarProducto(panel3txtAgregarProductoID.getText());
 		int total = 0;
@@ -553,6 +574,10 @@ public class Controlador implements Initializable {
 	}
 	
 	@FXML
+	/**
+	 * Creacion del metodo panel3btnNuevaCompraAction
+	 * @param event, permite limpiar la pantalla, y digitalizar una nueva compra
+	 */
     void panel3btnNuevaCompraAction(ActionEvent event) {
 		productosVenta.clear();
 		panel3txtTotalTabla.setText("0");
@@ -577,6 +602,10 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo panel3btnPagarAction
+	 * @param event, muestra el estado final de la compra, para realizar el respectivo pago
+	 */
 	void panel3btnPagarAction(ActionEvent event) {
 		Double Saldo = (Double.parseDouble(panel3txtDineroEntrante.getText()))
 				- (Double.parseDouble(panel3txtTotalCompra.getText()));
@@ -594,6 +623,10 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo panel4btnAgregarProductoAction
+	 * @param event, permite agregar un producto al inventario del establecimiento
+	 */
 	void panel4btnAgregarProductoAction(ActionEvent event) {
 		ProductoInventario producto = new ProductoInventario();
 		producto.setNombre(panel4txtNombre.getText());
@@ -609,6 +642,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Cerrar
+	 * @param event, permite cerrar la ventana, en donde actualmete se trabaja, este metodo sirve para cada 
+	 * uno de los paneles hechos en la aplicacion
+	 */
 	void panel4btnCerrarAction(ActionEvent event) {
 		System.exit(0);
 	}
@@ -634,6 +672,10 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo panel5btnAgregarProveedorAction
+	 * @param event, permite agregar un proveedor con el cual el establecimiento podra trabajar
+	 */
 	void panel5btnAgregarProveedorAction(ActionEvent event) {
 		Proveedor proveedor = new Proveedor();
 		proveedor.setIdProveedor(panel5txtCodigoProveedor.getText());
@@ -665,6 +707,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Cerrar
+	 * @param event, permite cerrar la ventana, en donde actualmete se trabaja, este metodo sirve para cada 
+	 * uno de los paneles hechos en la aplicacion
+	 */
 	void panel5btnCerrarAction(ActionEvent event) {
 		System.exit(0);
 	}
@@ -695,6 +742,10 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo panel6btnAgregarAction
+	 * @param event, permite agregar un nuevo empleado al sistema, siendo un nuevo cajero o administrador
+	 */
 	void panel6btnAgregarAction(ActionEvent event) {
 		Empleado persona = new Empleado();
 		persona.setFechaNacimiento(panel6DateFechaNacimiento.getValue().toString());
@@ -713,6 +764,11 @@ public class Controlador implements Initializable {
 	}
 
 	@FXML
+	/**
+	 * Creacion del metodo Cerrar
+	 * @param event, permite cerrar la ventana, en donde actualmete se trabaja, este metodo sirve para cada 
+	 * uno de los paneles hechos en la aplicacion
+	 */
 	void panel6btnCerrarAction(ActionEvent event) {
 		System.exit(0);
 	}
@@ -731,7 +787,10 @@ public class Controlador implements Initializable {
 	void panel6imgRegresarAction(MouseEvent event) {
 		panelRecursosHumanos.setLayoutX(2000);
 	}
-
+	/**
+	 * En este metodo se inicializan todos los componentes que hacen parte de cada uno de los paneles
+	 * para poder trabajar en ellos
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		panelMenu.setLayoutX(2000);
 		panelVenta.setLayoutX(2000);
@@ -780,7 +839,10 @@ public class Controlador implements Initializable {
 		}
 		
 	}
-
+	/**
+	 * Creacion del metodo inicializarTablaVenta
+	 * inicializa la tablaVenta para poder visualizar en ella los campos que se llenaron de las ventas anteriores
+	 */
 	private void inicializarTablaVenta() {
 		panel3columNombre.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("nombre"));
 		panel3columIdentificador
@@ -792,7 +854,11 @@ public class Controlador implements Initializable {
 		productosVenta = FXCollections.observableArrayList();
 		panel3TablaVenta.setItems(productosVenta);
 	}
-
+	/**
+	 * Creacion del metodo inicializarTablaInventario
+	 * inicializa la TablaInventario para poder visualizar en ella los productos 
+	 * que actualmente contiene el establecimiento
+	 */
 	private void inicializarTablaInventario() {
 		panel4columID.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("idProducto"));
 		panel4columNombre.setCellValueFactory(new PropertyValueFactory<ProductoInventario, String>("nombre"));
@@ -806,7 +872,11 @@ public class Controlador implements Initializable {
 		productosInventario = FXCollections.observableArrayList();
 		panel4tablaInventario.setItems(productosInventario);
 	}
-
+	/**
+	 * Creacion del metodo inicializarTablaRecursosHumanos
+	 * inicializa la TablaRecursosHumanos para poder visualizar los empleados que posteriormente se registraron
+	 * en el sistema para que futuramente puedan laborar en la aplicacion
+	 */
 	private void inicializarTablaRecursosHumanos() {
 		panel6columCodigoEmpleado.setCellValueFactory(new PropertyValueFactory<Empleado, String>("codigo"));
 		panel6columNombre.setCellValueFactory(new PropertyValueFactory<Empleado, String>("nombre"));
@@ -814,7 +884,11 @@ public class Controlador implements Initializable {
 		empleados = FXCollections.observableArrayList();
 		panel6tablaRRHH.setItems(empleados);
 	}
-
+	/**
+	 * Creacion del metodo inicializarTablaProveedores
+	 * inicializa la TablaProveedores para poder evidenciar los proveedores con los cuales trabaja el establecimiento/sucursal
+	 * 
+	 */
 	private void inicializarTablaProveedores() {
 		panel5columCP.setCellValueFactory(new PropertyValueFactory<Proveedor, String>("idProveedor"));
 		panel5columNombreEmpresa.setCellValueFactory(new PropertyValueFactory<Proveedor, String>("nombre"));
