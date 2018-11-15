@@ -52,7 +52,7 @@ public class Producto {
 	}
 	/**
 	 * 
-	 * @param idProducto
+	 * @param idProducto, unico
 	 */
 	public void setIdProducto(String idProducto) {
 		this.idProducto = idProducto;
@@ -66,7 +66,7 @@ public class Producto {
 	}
 	/**
 	 * 
-	 * @param nombre
+	 * @param nombre del producto
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -80,7 +80,7 @@ public class Producto {
 	}
 	/**
 	 * 
-	 * @param marca
+	 * @param marca del producto
 	 */
 	public void setMarca(String marca) {
 		this.marca = marca;
@@ -94,7 +94,7 @@ public class Producto {
 	}
 	/**
 	 * 
-	 * @param categoria
+	 * @param categoria del producto
 	 */
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
@@ -108,21 +108,21 @@ public class Producto {
 	}
 	/**
 	 * 
-	 * @param contenido
+	 * @param contenido neto del producto
 	 */
 	public void setContenido(String contenido) {
 		this.contenido = contenido;
 	}
 	/**
 	 * 
-	 * @param precio
+	 * @return precio
 	 */
 	public Double getPrecio() {
 		return precio;
 	}
 	/**
 	 * 
-	 * @param precio
+	 * @param precio, del producto
 	 */
 	public void setPrecio(Double precio) {
 		this.precio = precio;

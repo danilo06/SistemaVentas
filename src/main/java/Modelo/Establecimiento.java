@@ -144,7 +144,7 @@ public class Establecimiento {
 	}
     	/**
      	* 
-     	* @param producto
+     	* @param producto datos del producto
      	*/
 	public void agregarProductoInventario(ProductoInventario producto) {
 		InsertarTabla.addProductoInventario(producto.getIdProducto(), producto.getNombre(), producto.getMarca(), producto.getCategoria(), producto.getContenido(), producto.getUnidades(), producto.getFechaVencimiento(), producto.getPrecio());
@@ -152,7 +152,7 @@ public class Establecimiento {
 	}
 	/**
 	 * 
-	 * @param proveeedor
+	 * @param proveeedor datos proveedor
 	 */
 	public void agregarProveedor(Proveedor proveeedor) {
 		InsertarTabla.addProveedor(proveeedor.getIdProveedor() , proveeedor.getNombre() , proveeedor.getTelefono(), proveeedor.getDireccion(), proveeedor.getCorreo());
@@ -160,8 +160,8 @@ public class Establecimiento {
 	}
     	/**
      * 
-     * @param idProducto
-     * @return
+     * @param idProducto, id unico del producto
+     * @return 1
      */
 	public int buscarProducto(String idProducto) {
 		for (int i=0;i<productos.size();i++) {
@@ -173,7 +173,7 @@ public class Establecimiento {
 	}
 	/**
 	 * 
-	 * @param id
+	 * @param id, producto del inventario
 	 * @return producto en el inventario
 	 */
 	public ProductoInventario traerProducto(String id) {

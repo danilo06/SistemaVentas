@@ -24,7 +24,7 @@ public class ConsultaVista {
 	static final String PASSWORD = DbPropertiesReader.getString("db.password");
 	/**
 	 * Metodo que permite inicializar la clase
-	 * @param args
+	 * @param args, metodo main
 	 */
 	public static void main(String args[]) {
 	}

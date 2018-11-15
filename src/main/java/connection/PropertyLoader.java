@@ -85,6 +85,8 @@ public abstract class PropertyLoader
     /**
      * A convenience overload of {@link #loadProperties(String, ClassLoader)}
      * that uses the current thread's context classloader.
+     * @param name, properties
+     * @return loadProperties
      */
     public static Properties loadProperties (final String name)
     {

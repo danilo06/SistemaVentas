@@ -48,14 +48,14 @@ public class InsertTable {
 	} // end PersonQueries constructor
 	/**
 	 * 
-	 * @param idProducto
-	 * @param nombre
-	 * @param marca
-	 * @param categoria
-	 * @param contenido
-	 * @param unidades
-	 * @param fechaVencimiento
-	 * @param precio
+	 * @param idProducto, producto en inventario
+	 * @param nombre, producto en inventario
+	 * @param marca, producto en inventario
+	 * @param categoria, producto en inventario
+	 * @param contenido, producto en inventario
+	 * @param unidades, producto en inventario
+	 * @param fechaVencimiento, producto en inventario
+	 * @param precio, producto en inventario
 	 * @return resultado de la incersion
 	 */
 	public int addProductoInventario(String idProducto, String nombre, String marca, String categoria, String contenido, int unidades, String fechaVencimiento, Double precio ) {
@@ -80,11 +80,11 @@ public class InsertTable {
 	}
 	/**
 	 * 
-	 * @param idProveedor
-	 * @param nombre_empresa
-	 * @param telefono
-	 * @param direccion
-	 * @param correo
+	 * @param idProveedor, proveedor
+	 * @param nombre_empresa, proveedor
+	 * @param telefono, telefono
+	 * @param direccion, proveedor
+	 * @param correo, proveedor
 	 * @return ingreso de un nuevo proveedor
 	 */
 	public int addProveedor(String idProveedor, String nombre_empresa , String telefono, String direccion, String correo) {

@@ -37,35 +37,35 @@ public class Persona {
 	}
 	/**
 	 * 
-	 * @param nombre
+	 * @param nombre del empleado
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	/**
 	 * 
-	 * @return telefono
+	 * @return telefono del empleado
 	 */
 	public String getTelefono() {
 		return telefono;
 	}
 	/**
 	 * 
-	 * @param telefono
+	 * @param telefono del empleado
 	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	/**
 	 * 
-	 * @return direccion
+	 * @return direccion del empleado
 	 */
 	public String getDireccion() {
 		return direccion;
 	}
 	/**
 	 * 
-	 * @param direccion
+	 * @param direccion empleado
 	 */
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;

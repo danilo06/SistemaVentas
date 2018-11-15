@@ -17,7 +17,7 @@ public class DbPropertiesReader {
 	}
 	/**
 	 * 
-	 * @param key
+	 * @param key, conexion
 	 * @return conxion realizada
 	 */
 	public static String getString(String key) {
