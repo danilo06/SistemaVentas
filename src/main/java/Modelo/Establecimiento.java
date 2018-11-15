@@ -6,10 +6,12 @@ import java.util.*;
 import connection.*;
 
 /**
- * 
+ * Esta clase permite trabajar con los paneles con los cuales cuenta la aplicacion
+ * @author Danilo Beleño, Sebastian Suarez, Jose Buitrago, Andres Barragan
+ *
  */
 public class Establecimiento {
-
+	//Creacion de los atributos para el funcionamiento de la clase
     /**
      * Default constructor
      */
@@ -140,17 +142,27 @@ public class Establecimiento {
 	public void setEmpleados(ArrayList<Empleado> empleados) {
 		this.empleados = empleados;
 	}
-    
+    	/**
+     	* 
+     	* @param producto
+     	*/
 	public void agregarProductoInventario(ProductoInventario producto) {
 		InsertarTabla.addProductoInventario(producto.getIdProducto(), producto.getNombre(), producto.getMarca(), producto.getCategoria(), producto.getContenido(), producto.getUnidades(), producto.getFechaVencimiento(), producto.getPrecio());
 		productos.add(producto);
 	}
-	
+	/**
+	 * 
+	 * @param proveeedor
+	 */
 	public void agregarProveedor(Proveedor proveeedor) {
 		InsertarTabla.addProveedor(proveeedor.getIdProveedor() , proveeedor.getNombre() , proveeedor.getTelefono(), proveeedor.getDireccion(), proveeedor.getCorreo());
 	proveedores.add(proveeedor);
 	}
-    
+    	/**
+     * 
+     * @param idProducto
+     * @return
+     */
 	public int buscarProducto(String idProducto) {
 		for (int i=0;i<productos.size();i++) {
 			if (productos.get(i).getIdProducto().equals(idProducto) || productos.get(i).getUnidades()>0) {
@@ -159,7 +171,11 @@ public class Establecimiento {
 		}
 		return 0;
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @return producto en el inventario
+	 */
 	public ProductoInventario traerProducto(String id) {
 		ProductoInventario producto = new ProductoInventario();
 		for (int i=0;i<productos.size();i++) {
