@@ -509,17 +509,21 @@ public class Controlador implements Initializable {
 	 */
 	void panel3btnAgregarAction(ActionEvent event) {
 		int valor = buscarProducto(panel3txtAgregarProductoID.getText());
-		int total = 0;
+		int total = 0,aux=0;
 		if (valor == 1) {
 			ProductoInventario producto = traerProducto(panel3txtAgregarProductoID.getText());
-			for (int i=0;i<productosVenta.size();i++)
-				if (producto.getIdProducto().equals(productosVenta.get(i).getIdProducto())) {
-					productosVenta.get(i).setUnidades(productosVenta.get(i).getUnidades()+1);
-				}else {
+			for (int i=0;i<productosVenta.size();i++) {
+				if (producto.getIdProducto().equals(productosVenta.get(i).getIdProducto())) {					
+					productosVenta.get(i).setUnidades((productosVenta.get(i).getUnidades())+1);
+					panel3txtEstadoCompra.setText("Unidad añadida");
+					aux=1;
+				}
+			}
+			if (aux==0) {
 					productosVenta.add(producto);
 				}
-			productosVenta.add(producto);
 			System.out.println(productosVenta.size());
+			System.out.println("-> "+productosVenta.get(0).getUnidades());
 			
 			producto.generarTotal();
 			
