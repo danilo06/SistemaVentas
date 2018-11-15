@@ -22,8 +22,6 @@ public class Establecimiento {
     	empleados = ConsultaVista.consultaEmpleados();
     	proveedores = ConsultaVista.consultaProveedores();
     	InsertarTabla = new InsertTable();
-    	
-    	
     }
 
     /**
