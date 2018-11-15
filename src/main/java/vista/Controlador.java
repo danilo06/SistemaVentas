@@ -26,12 +26,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.StageStyle;
 /**
- * 
+ * Esta clase permite trabajar con los paneles con los cuales cuenta la aplicacion
  * @author Danilo Beleño, Sebastian Suarez, Jose Buitrago, Andres Barragan
  *
  */
 public class Controlador implements Initializable {
-
+	//Declaracion de los atributos privados
 	@FXML
 	private AnchorPane panelLogin;
 
@@ -438,6 +438,7 @@ public class Controlador implements Initializable {
 	 * @param event, para verificar los usuarion que ingresan al sistema, si se encuentran registrados o no.
 	 */
 	void panel1btnInicioAction(ActionEvent event) {
+		//Autentifica si el empleado se encuentra registrado en la base de datos
 		if (ConsultaVista.autenticarEmpleado(panel1TxtUsuario.getText(), panel1txtContrasena.getText())) {
 			Empleado empleado = new Empleado();
 			empleado = ConsultaVista.consultarEmpleado(panel1TxtUsuario.getText(), panel1txtContrasena.getText());
