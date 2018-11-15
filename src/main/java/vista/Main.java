@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 /**
- * Declaracion de la clase Main
+ * Declaracion de la clase Main, Clase principal del sistema
  * @author Danilo Beleño, Sebastian Suarez, Jose Buitrago, Andres Barragan
  * @version 15/11/2018
  */
