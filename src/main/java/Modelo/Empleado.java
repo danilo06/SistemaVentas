@@ -2,7 +2,7 @@ package Modelo;
 
 
 import java.util.*;
-
+//Declaracion de los atributos
 /**
  * 
  */
