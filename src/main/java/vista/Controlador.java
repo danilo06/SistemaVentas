@@ -519,6 +519,8 @@ public class Controlador implements Initializable {
 	/**
 	 * Creacion del metodo panel3btnAgregarAction
 	 * @param event, permite gestionar un producto al establecimiento en el cual esta operando la palicacion
+	 * @param valor,valor ingresado por el usuario, para encontrar un producto
+	 * @param total, mediante un condicional verifica que los datos coincidan con un producto que ya se encuentre registrado
 	 */
 	void panel3btnAgregarAction(ActionEvent event) {
 		int valor = establecimiento.buscarProducto(panel3txtAgregarProductoID.getText());
@@ -669,6 +671,7 @@ public class Controlador implements Initializable {
 	 * @param event, permite agregar un proveedor con el cual el establecimiento podra trabajar
 	 */
 	void panel5btnAgregarProveedorAction(ActionEvent event) {
+		// Creacion de un nuevo objeto llamado Proveedor se registraran los datos del nuevo proveedor
 		Proveedor proveedor = new Proveedor();
 		proveedor.setIdProveedor(panel5txtCodigoProveedor.getText());
 		proveedor.setTelefono(panel5txtTelefono.getText());
@@ -680,10 +683,11 @@ public class Controlador implements Initializable {
 		System.out.println("-----------------------");
 		System.out.println(panel5txtCodigoProveedor.getText());
 		System.out.println("-----------------------");
-		if(ConsultaVista.autenticarProveedor(panel5txtCodigoProveedor.getText())) {
+		if(ConsultaVista.autenticarProveedor(panel5txtCodigoProveedor.getText())) {    //agrega al nuevo proveedor mediante el if 
 		proveedores.add(proveedor);
 		establecimiento.agregarProveedor(proveedor);
 		}
+		//Verifica que el proveedor no se encuentre registrado en el sistema
 		else
 		{
 			System.out.println("proveedor repetido!");
